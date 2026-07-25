@@ -1,0 +1,82 @@
+{
+  "summary": "Motivated 17-year-old web developer and video editor from Nepal with experience building real-world web projects and editing videos. Started video editing in 2020 and web development in 2024. Passionate about learning new technologies and creating useful and creative digital projects.",
+  
+  "experience": [
+    {
+      "id": 1,
+      "title": "Independent Web Developer",
+      "company": "Personal Projects",
+      "location": "Nepal",
+      "startDate": "2024",
+      "endDate": "Present",
+      "description": "Developing personal web projects including chat applications and tracking websites. Learning frontend and backend development while building real-world projects.",
+      "achievements": [
+        "Built real-time chat application",
+        "Created anime and manga tracking website",
+        "Learned full-stack web development basics"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Video Editor",
+      "company": "Freelance / Personal Work",
+      "location": "Nepal",
+      "startDate": "2020",
+      "endDate": "Present",
+      "description": "Editing videos using Kinemaster and CapCut for personal and creative projects. Developed skills in cutting, transitions, effects, and timing.",
+      "achievements": [
+        "4+ years of video editing experience",
+        "Experienced with CapCut editing tools",
+        "Improved video quality and editing speed"
+      ]
+    }
+  ],
+
+  "education": [
+  {
+    "id": 1,
+    "degree": "Pre-School to Grade 3",
+    "institution": "Kudos School",
+    "location": "Nepal",
+    "graduationYear": "2018"
+  },
+  {
+    "id": 2,
+    "degree": "Grade 4",
+    "institution": "Sungaba School",
+    "location": "Nepal",
+    "graduationYear": "2019"
+  },
+  {
+    "id": 3,
+    "degree": "Grade 5 - Grade 10",
+    "institution": "Saptakoshi School",
+    "location": "Nepal",
+    "graduationYear": "2024"
+  },
+  {
+    "id": 4,
+    "degree": "Grade 11 - Grade 12",
+    "institution": "Siddhartha Secondary School",
+    "location": "Nepal",
+    "graduationYear": "2026"
+  }
+  ],
+  "certifications": [
+    {
+      "name": "Self-Taught Web Development",
+      "issuer": "Online Learning & Practice",
+      "year": "2024"
+    },
+    {
+      "name": "Video Editing Experience",
+      "issuer": "Personal Practice",
+      "year": "2020-Present"
+    }
+  ],
+
+  "resumeFile": {
+    "downloadUrl": "/assets/resume.pdf",
+    "viewUrl": "/assets/resume.pdf"
+  }
+}

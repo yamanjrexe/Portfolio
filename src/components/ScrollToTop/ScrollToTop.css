@@ -1,0 +1,152 @@
+/* components/ScrollToTop/ScrollToTop.css */
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.4s ease forwards;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: visible;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-5px) scale(1.05);
+  background: var(--gradient-primary);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+.scroll-to-top:hover .scroll-arrow i {
+  color: white;
+  transform: translateY(-3px);
+}
+
+.scroll-to-top:hover .scroll-ripple {
+  animation: ripple 0.6s ease-out;
+}
+
+/* Progress Circle */
+.scroll-progress-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.scroll-progress-bg {
+  stroke: var(--color-border);
+  stroke-width: 3;
+}
+
+.scroll-progress-fill {
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.1s linear;
+  filter: drop-shadow(0 0 5px rgba(99, 102, 241, 0.5));
+}
+
+/* Arrow Icon */
+.scroll-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.scroll-arrow i {
+  font-size: 20px;
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+
+/* Ripple Effect */
+.scroll-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+/* Pulse animation when visible */
+.scroll-to-top {
+  animation: fadeInUp 0.4s ease forwards, pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: var(--shadow-lg);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.2), var(--shadow-lg);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .scroll-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+  }
+  
+  .scroll-arrow i {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-to-top {
+    bottom: 15px;
+    right: 15px;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .scroll-arrow i {
+    font-size: 16px;
+  }
+}

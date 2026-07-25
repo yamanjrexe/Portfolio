@@ -1,0 +1,296 @@
+/* Resume.css - Modern Design */
+.resume {
+  padding: var(--spacing-5xl) 0;
+  background: var(--color-background);
+  position: relative;
+}
+
+.resume::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.resume-summary-card {
+  background: var(--color-surface);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-3xl);
+  border: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2xl);
+  flex-wrap: wrap;
+}
+
+.resume-summary-text {
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  font-size: var(--font-size-md);
+  flex: 1;
+}
+
+.resume-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.resume-btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+}
+
+.resume-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.resume-btn-secondary {
+  background: var(--color-surface-alt);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.resume-btn-secondary:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.resume-tabs {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-3xl);
+  flex-wrap: wrap;
+}
+
+.resume-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.875rem 2rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--border-radius-full);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.resume-tab i {
+  font-size: 14px;
+}
+
+.resume-tab:hover,
+.resume-tab.active {
+  background: var(--gradient-primary);
+  color: white;
+  border-color: transparent;
+}
+
+.resume-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--transition-normal);
+}
+
+.resume-panel.active {
+  display: block;
+  animation: fadeInUp 0.6s forwards;
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  display: flex;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.timeline-marker {
+  position: relative;
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+.timeline-line {
+  position: absolute;
+  top: 20px;
+  width: 2px;
+  height: calc(100% + var(--spacing-2xl));
+  background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+  opacity: 0.3;
+}
+
+.timeline-card {
+  flex: 1;
+  background: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--color-border-light);
+  transition: all var(--transition-normal);
+}
+
+.timeline-card:hover {
+  transform: translateX(10px);
+  border-color: var(--color-primary);
+}
+
+.timeline-title {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.timeline-company {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-sm);
+}
+
+.timeline-date {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  color: var(--color-primary);
+}
+
+.timeline-description {
+  color: var(--color-text-secondary);
+  margin: var(--spacing-md) 0;
+}
+
+.timeline-achievements {
+  list-style: none;
+  padding: 0;
+}
+
+.timeline-achievements li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.timeline-achievements li i {
+  color: var(--color-primary);
+  font-size: 12px;
+}
+
+.education-grid,
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.education-card,
+.certification-card {
+  display: flex;
+  gap: var(--spacing-lg);
+  background: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--color-border-light);
+  transition: all var(--transition-normal);
+}
+
+.education-card:hover,
+.certification-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-secondary);
+}
+
+.education-card-icon,
+.certification-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(6, 182, 212, 0.1);
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-secondary);
+}
+
+.education-card-icon i,
+.certification-icon i {
+  font-size: 24px;
+}
+
+.education-degree,
+.certification-name {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.education-institution,
+.certification-issuer {
+  color: var(--color-secondary);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-sm);
+}
+
+@media (max-width: 768px) {
+  .resume-summary-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .resume-actions {
+    width: 100%;
+    justify-content: center;
+  }
+  .timeline-item {
+    flex-direction: column;
+  }
+  .timeline-marker {
+    display: none;
+  }
+  .education-card,
+  .certification-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}

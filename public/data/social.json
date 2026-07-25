@@ -1,0 +1,21 @@
+{
+  "links": [
+    {
+      "platform": "GitHub",
+      "url": "https://github.com/yamanjrexe",
+      "icon": "Github"
+    },
+    {
+      "platform": "Facebook",
+      "url": "https://www.facebook.com/yamanjrexe",
+      "icon": "Facebook"
+    },
+    {
+      "platform": "Instagram",
+      "url": "https://instagram.com/yamanjr.exe",
+      "icon": "Instagram"
+    }
+  ],
+  "email": "yamanjrexe@gmail.com",
+  "location": "Nepal"
+}

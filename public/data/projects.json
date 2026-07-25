@@ -1,0 +1,74 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Jr Editz - Anime Editing Tutorials",
+      "description": "Jreditz is dedicated to teaching anime video editing, manga panel animation, and creative VFX for beginners and pros. With step-by-step tutorials and free resources, we help editors bring their ideas to life.",
+      "image": "/assets/images/projects/jr-editz.png",
+      "techStack": ["HTML", "CSS", "Javascript"],
+      "liveUrl": "https://jreditz.netlify.app/",
+      "githubUrl": "https://github.com/yamanjrexe/JrEditz",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "title": "AniPulse - Anime Tracker",
+      "description": "AniPulse is a modern, feature-rich anime tracker that helps you manage your watchlist, track progress, analyze detailed statistics, and celebrate your anime journey.",
+      "image": "/assets/images/projects/ani-pulse.png",
+      "techStack": ["HTML", "CSS", "Javascript", "Node.js", "Firebase"],
+      "liveUrl": "https://ani-pulse.netlify.app/",
+      "githubUrl": "https://github.com/yamanjrexe/AniPulse",
+      "status": "completed"
+    },
+    {
+      "id": 3,
+      "title": "Shark Game - 2D Platformer",
+      "description": "An exciting 2D platformer game where you control a shark through various obstacles and challenges.",
+      "image": "/assets/images/projects/shark-game.png",
+      "techStack": ["HTML", "CSS", "Javascript"],
+      "liveUrl": "https://shark-game1.netlify.app/",
+      "githubUrl": "https://github.com//yamanjrexe/Shark-Game",
+      "status": "completed"
+    },
+    {
+      "id": 4,
+      "title": "Regina Shoe Center - E-commerce Website",
+      "description": "Regina Shoe Center is a modern e-commerce platform for selling shoes online. With a user-friendly interface and seamless shopping experience, customers can easily browse, select, and purchase their favorite footwear.",
+      "image": "/assets/images/projects/regina-shoe.png",
+      "techStack": ["HTML", "CSS", "Javascript", "React", "Node.js", "Firebase"],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/yamanjrexe/Regina-Shoe-Center",
+      "status": "development"
+    },
+    {
+      "id": 5,
+      "title": "Manga Hub - Manga Tracker",
+      "description": "Manga Hub is a comprehensive manga tracking application that allows users to browse, search, and manage their manga collections. With detailed information about each manga, users can track their reading progress and discover new titles.",
+      "image": "/assets/images/projects/manga-hub.png",
+      "techStack": ["HTML", "CSS", "Javascript"],
+      "liveUrl": "https://manga-hub1.netlify.app/",
+      "githubUrl": "https://github.com/yamanjrexe/Manga-Hub",
+      "status": "live"
+    },
+    {
+      "id": 6,
+      "title": "AnimeX - Anime Streaming Platform",
+      "description": "AnimeX is a modern anime streaming platform that offers a vast collection of anime series and movies. With a user-friendly interface and high-quality streaming, users can enjoy their favorite anime anytime, anywhere.",
+      "image": "/assets/images/projects/animeX.png",
+      "techStack": ["HTML", "CSS", "Javascript", "React", "Node.js", "MongoDB"],
+      "liveUrl": "#",
+      "githubUrl": "https://github.com/yamanjrexe/AnimeX",
+      "status": "development"
+    },
+    {
+      "id": 7,
+      "title": "Edu Sphere",
+      "description": "Edu Sphere is a responsive educational web platform designed to deliver interactive learning resources through a clean and user-friendly interface.",
+      "image": "/assets/images/projects/edu-sphere.png",
+      "techStack": ["Html" , "Js" , "Css"],
+      "liveUrl": "https://edu-sphere1.netlify.app/",
+      "githubUrl": "https://github.com/yamanjrexe/edusphere",
+      "status": "live"
+    }
+  ]
+}
