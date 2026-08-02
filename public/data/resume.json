@@ -50,7 +50,7 @@
   {
     "id": 3,
     "degree": "Grade 5 - Grade 10",
-    "institution": "Saptakoshi School",
+    "institution": "Saptakoshi Secondary School",
     "location": "Nepal",
     "graduationYear": "2024"
   },
@@ -60,6 +60,13 @@
     "institution": "Siddhartha Secondary School",
     "location": "Nepal",
     "graduationYear": "2026"
+  },
+  {
+    "id": 5,
+    "degree": "Bachelor's Degree (In Progress)",
+    "institution": "N/A",
+    "location": "Nepal",
+    "graduationYear": "in progress"
   }
   ],
   "certifications": [

@@ -8,7 +8,7 @@
       "techStack": ["HTML", "CSS", "Javascript"],
       "liveUrl": "https://jreditz.netlify.app/",
       "githubUrl": "https://github.com/yamanjrexe/JrEditz",
-      "status": "completed"
+      "status": "live"
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "techStack": ["HTML", "CSS", "Javascript", "Node.js", "Firebase"],
       "liveUrl": "https://ani-pulse.netlify.app/",
       "githubUrl": "https://github.com/yamanjrexe/AniPulse",
-      "status": "completed"
+      "status": "live"
     },
     {
       "id": 3,
@@ -28,14 +28,21 @@
       "techStack": ["HTML", "CSS", "Javascript"],
       "liveUrl": "https://shark-game1.netlify.app/",
       "githubUrl": "https://github.com//yamanjrexe/Shark-Game",
-      "status": "completed"
+      "status": "live"
     },
     {
       "id": 4,
       "title": "Regina Shoe Center - E-commerce Website",
       "description": "Regina Shoe Center is a modern e-commerce platform for selling shoes online. With a user-friendly interface and seamless shopping experience, customers can easily browse, select, and purchase their favorite footwear.",
       "image": "/assets/images/projects/regina-shoe.png",
-      "techStack": ["HTML", "CSS", "Javascript", "React", "Node.js", "Firebase"],
+      "techStack": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "React",
+        "Node.js",
+        "Firebase"
+      ],
       "liveUrl": "#",
       "githubUrl": "https://github.com/yamanjrexe/Regina-Shoe-Center",
       "status": "development"
@@ -52,12 +59,20 @@
     },
     {
       "id": 6,
-      "title": "AnimeX - Anime Streaming Platform",
-      "description": "AnimeX is a modern anime streaming platform that offers a vast collection of anime series and movies. With a user-friendly interface and high-quality streaming, users can enjoy their favorite anime anytime, anywhere.",
-      "image": "/assets/images/projects/animeX.png",
-      "techStack": ["HTML", "CSS", "Javascript", "React", "Node.js", "MongoDB"],
+      "title": "AniSora – Anime Streaming Platform",
+      "description": "AniSora is a full‑featured anime streaming platform. It provides a seamless experience with a modern UI, high‑quality streaming, and deep integration with AniList for watchlist synchronization. Users can sign in via Email, Google, or AniList OAuth, and manage their watchlist with real‑time updates.",
+      "image": "/assets/images/projects/anisora.png",
+      "techStack": [
+        "React",
+        "Supabase",
+        "PostgreSQL",
+        "AniList GraphQL API",
+        "JWT",
+        "OAuth 2.0",
+        "CSS"
+      ],
       "liveUrl": "#",
-      "githubUrl": "https://github.com/yamanjrexe/AnimeX",
+      "githubUrl": "https://github.com/yamanjrexe/AniSora",
       "status": "development"
     },
     {
@@ -65,7 +80,7 @@
       "title": "Edu Sphere",
       "description": "Edu Sphere is a responsive educational web platform designed to deliver interactive learning resources through a clean and user-friendly interface.",
       "image": "/assets/images/projects/edu-sphere.png",
-      "techStack": ["Html" , "Js" , "Css"],
+      "techStack": ["Html", "Js", "Css"],
       "liveUrl": "https://edu-sphere1.netlify.app/",
       "githubUrl": "https://github.com/yamanjrexe/edusphere",
       "status": "live"
