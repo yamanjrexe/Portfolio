@@ -1,13 +1,13 @@
 {
   "profile": {
-    "name": "Yaman Chapagin",
+    "name": "Yaman Chapagain",
     "photo": "/assets/images/profile/me.png",
     "role": "Web Developer & Video Editor",
     "dob": "2008-11-01",
     "location": "Nepal"
   },
   "hero": {
-    "name": "Yaman Chapagin",
+    "name": "Yaman Chapagain",
     "nickname": "Yaman Jr",
     "role": "Web Developer & Video Editor",
     "tagline": "Creating websites and videos with creativity and precision",
@@ -18,7 +18,7 @@
     }
   },
   "about": {
-    "bio": "I'm Yaman Chapagin, a 17-year-old web developer and video editor from Nepal. I started video editing in 2020 using Kinemaster and later moved to CapCut, improving my editing skills over time. In 2024, I began learning web development and started building projects like chat applications and tracking websites. I enjoy creating digital projects and continuously improving my skills.",
+    "bio": "I'm Yaman Chapagain, a 17-year-old web developer and video editor from Nepal. I started video editing in 2020 using Kinemaster and later moved to CapCut, improving my editing skills over time. In 2024, I began learning web development and started building projects like chat applications and tracking websites. I enjoy creating digital projects and continuously improving my skills.",
     "education": [
       {
         "degree": "Student",
