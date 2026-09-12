@@ -11,6 +11,7 @@
     { "id": "skills", "label": "Skills", "href": "skills" },
     { "id": "projects", "label": "Projects", "href": "projects" },
     { "id": "resume", "label": "Resume", "href": "resume" },
+    { "id": "gallery", "label": "Gallery", "href": "gallery" },
     { "id": "contact", "label": "Contact", "href": "contact" }
   ],
   "theme": {

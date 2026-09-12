@@ -1,0 +1,383 @@
+/* components/Gallery/Gallery.css */
+
+/* =========================================
+   BASE LAYOUT
+   ========================================= */
+.gallery {
+    padding: 80px 0;
+    background: var(--color-background);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Break out of the centered container to fill the screen */
+.gallery .container {
+    max-width: 100% !important;
+    width: 100%;
+    padding: 0 24px;
+}
+
+/* =========================================
+   FILTER BUTTONS
+   ========================================= */
+.gallery-filter {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.gallery-filter-btn {
+    padding: 8px 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: 30px;
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: capitalize;
+}
+
+.gallery-filter-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.gallery-filter-btn.active {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(var(--color-primary-rgb, 99, 102, 241), 0.3);
+}
+
+/* =========================================
+   MASONRY GRID (Powered by react-masonry-css)
+   ========================================= */
+.my-masonry-grid {
+    display: flex;
+    margin-left: -20px;
+    /* Gutter size offset */
+    width: auto;
+}
+
+.my-masonry-grid_column {
+    padding-left: 20px;
+    /* Gutter size */
+    background-clip: padding-box;
+}
+
+/* =========================================
+   GALLERY ITEM
+   ========================================= */
+.gallery-item {
+    margin-bottom: 20px;
+    /* Vertical spacing between items */
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: var(--color-surface-alt);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+}
+
+.gallery-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+}
+
+/* Preserves the EXACT image ratio (No cropping, no stretching) */
+.gallery-item img {
+    width: 100%;
+    height: auto !important;
+    /* Magic line: keeps original aspect ratio */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+/* =========================================
+   HOVER OVERLAY
+   ========================================= */
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    pointer-events: none;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-category {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+}
+
+.gallery-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    transform: translateY(10px);
+    transition: transform 0.3s ease 0.05s;
+}
+
+.gallery-item:hover .gallery-category,
+.gallery-item:hover .gallery-title {
+    transform: translateY(0);
+}
+
+/* =========================================
+   EMPTY STATE
+   ========================================= */
+.gallery-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    background: var(--color-surface);
+    border-radius: 24px;
+    border: 1px dashed var(--color-border-light);
+    /* Dashed border looks nice for empty states */
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    animation: fadeInEmpty 0.5s ease forwards;
+}
+
+.gallery-empty-state i {
+    font-size: 56px;
+    color: var(--color-text-tertiary);
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.gallery-empty-state h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 10px;
+}
+
+.gallery-empty-state p {
+    font-size: 14px;
+    color: var(--color-text-tertiary);
+    max-width: 400px;
+    line-height: 1.6;
+}
+
+/* =========================================
+   LIGHTBOX
+   ========================================= */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 95vw;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: zoomIn 0.3s ease;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.lightbox-close:hover {
+    background: var(--color-primary);
+    transform: rotate(90deg);
+}
+
+.lightbox-caption {
+    text-align: center;
+    margin-top: 15px;
+    color: white;
+}
+
+.lightbox-caption h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.lightbox-caption p {
+    color: var(--color-text-tertiary);
+    font-size: 13px;
+    text-transform: capitalize;
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInEmpty {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   RESPONSIVE BREAKPOINTS
+   ========================================= */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .gallery {
+        padding: 60px 0;
+    }
+
+    .my-masonry-grid {
+        margin-left: -16px;
+    }
+
+    .my-masonry-grid_column {
+        padding-left: 16px;
+    }
+
+    .gallery-item {
+        margin-bottom: 16px;
+        border-radius: 12px;
+    }
+}
+
+/* Small Phones */
+@media (max-width: 576px) {
+    .gallery .container {
+        padding: 0 16px;
+    }
+
+    .gallery-filter {
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .gallery-filter-btn {
+        padding: 6px 14px;
+        font-size: 12px;
+    }
+
+    .my-masonry-grid {
+        margin-left: -12px;
+    }
+
+    .my-masonry-grid_column {
+        padding-left: 12px;
+    }
+
+    .gallery-item {
+        margin-bottom: 12px;
+        border-radius: 10px;
+    }
+
+    .gallery-overlay {
+        padding: 15px;
+    }
+
+    .gallery-title {
+        font-size: 14px;
+    }
+
+    .gallery-empty-state {
+        padding: 60px 15px;
+    }
+
+    .gallery-empty-state i {
+        font-size: 42px;
+    }
+
+    .gallery-empty-state h3 {
+        font-size: 18px;
+    }
+
+    .lightbox-close {
+        top: -40px;
+        width: 35px;
+        height: 35px;
+    }
+}

@@ -1,4 +1,3 @@
-/* ThemeToggle.css - Modern Toggle */
 .theme-toggle {
   background: none;
   border: none;
@@ -46,18 +45,38 @@
     margin-left: 0;
     margin-right: var(--spacing-sm);
   }
-  
+
   .theme-toggle-track {
     width: 48px;
     height: 24px;
   }
-  
+
   .theme-toggle-thumb {
     width: 18px;
     height: 18px;
   }
-  
+
   .theme-toggle-thumb.light {
     transform: translateX(24px);
+  }
+
+  .theme-icon {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .theme-toggle-track {
+    width: 42px;
+    height: 22px;
+  }
+
+  .theme-toggle-thumb {
+    width: 16px;
+    height: 16px;
+  }
+
+  .theme-toggle-thumb.light {
+    transform: translateX(20px);
   }
 }

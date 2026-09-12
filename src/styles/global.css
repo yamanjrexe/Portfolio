@@ -1,4 +1,5 @@
-/* global.css - Fixed Dark Spots */
+
+
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +9,9 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+  width: 100%;
 }
 
 body {
@@ -16,17 +20,19 @@ body {
   background: var(--color-background);
   line-height: var(--line-height-normal);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  width: 100%;
 }
 
-/* Fixed gradient background - no dark spots */
 body::before {
+  content: '';
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
+  background:
     radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.06) 0%, transparent 60%),
     radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.06) 0%, transparent 60%),
     radial-gradient(circle at 40% 80%, rgba(244, 63, 94, 0.04) 0%, transparent 60%);
@@ -40,42 +46,60 @@ body::before {
   flex-direction: column;
   position: relative;
   background: transparent;
+  width: 100%;
 }
 
 main {
   flex: 1;
   padding-top: var(--header-height);
+  width: 100%;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
+/* =========================================
+   TYPOGRAPHY - Fully Fluid
+   ========================================= */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-family-display);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   margin-bottom: var(--spacing-md);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 h1 {
-  font-size: var(--font-size-6xl);
+  font-size: clamp(2rem, 6vw, 3.75rem);
   letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: var(--font-size-4xl);
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
   letter-spacing: -0.01em;
 }
 
 h3 {
-  font-size: var(--font-size-2xl);
+  font-size: clamp(1.25rem, 3vw, 2rem);
 }
 
 p {
   margin-bottom: var(--spacing-md);
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-/* Links */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 a {
   color: var(--color-primary);
   text-decoration: none;
@@ -86,7 +110,9 @@ a:hover {
   color: var(--color-primary-light);
 }
 
-/* Container */
+/* =========================================
+   LAYOUT
+   ========================================= */
 .container {
   max-width: var(--container-max-width);
   margin: 0 auto;
@@ -94,17 +120,17 @@ a:hover {
   width: 100%;
 }
 
-/* Section */
 .section {
   padding: var(--spacing-5xl) 0;
   position: relative;
   background: transparent;
+  width: 100%;
 }
 
-/* Section Header */
 .section-header {
   text-align: center;
   margin-bottom: var(--spacing-4xl);
+  padding: 0 var(--spacing-md);
 }
 
 .section-subtitle {
@@ -117,6 +143,8 @@ a:hover {
   letter-spacing: 2px;
   color: var(--color-primary);
   margin-bottom: var(--spacing-sm);
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .section-subtitle i {
@@ -124,10 +152,11 @@ a:hover {
 }
 
 .section-title {
-  font-size: var(--font-size-4xl);
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   margin-bottom: var(--spacing-md);
+  line-height: 1.2;
 }
 
 .section-line {
@@ -138,7 +167,9 @@ a:hover {
   border-radius: var(--border-radius-full);
 }
 
-/* Scrollbar */
+/* =========================================
+   SCROLLBAR
+   ========================================= */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -157,37 +188,74 @@ a:hover {
   background: var(--color-primary-light);
 }
 
-/* Selection */
 ::selection {
   background: var(--color-primary);
   color: var(--color-text-inverse);
 }
 
-/* Responsive */
+/* =========================================
+   RESPONSIVE BREAKPOINTS
+   ========================================= */
+@media (min-width: 1600px) {
+  :root {
+    --container-max-width: 1440px;
+  }
+}
+
+@media (max-width: 1280px) {
+  :root {
+    --container-max-width: 1100px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --container-max-width: 960px;
+    --container-padding: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
-  html {
-    font-size: 14px;
+  :root {
+    --container-padding: 1.25rem;
+    --spacing-5xl: 5rem;
+    --spacing-4xl: 4rem;
+    --spacing-3xl: 3rem;
   }
-  
-  h1 {
-    font-size: var(--font-size-5xl);
-  }
-  
-  h2 {
-    font-size: var(--font-size-3xl);
-  }
-  
+
   .section {
     padding: var(--spacing-4xl) 0;
+  }
+
+  .section-header {
+    margin-bottom: var(--spacing-2xl);
   }
 }
 
 @media (max-width: 480px) {
-  h1 {
-    font-size: var(--font-size-4xl);
+  :root {
+    --container-padding: 1rem;
+    --spacing-5xl: 4rem;
+    --spacing-4xl: 3rem;
+    --spacing-3xl: 2.5rem;
+    --spacing-2xl: 2rem;
   }
-  
-  h2 {
-    font-size: var(--font-size-2xl);
+
+  body {
+    font-size: 15px;
+  }
+
+  .section {
+    padding: var(--spacing-3xl) 0;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --container-padding: 0.75rem;
+  }
+
+  body {
+    font-size: 14px;
   }
 }

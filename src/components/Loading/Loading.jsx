@@ -50,16 +50,6 @@ const Loading = ({ onLoadingComplete }) => {
   return (
     <div className={`loading-screen ${fadeOut ? 'fade-out' : ''}`}>
       <div className="loading-content">
-        {/* Animated Logo */}
-        <div className="loading-logo">
-          <div className="loading-logo-icon">
-            <i className="fas fa-code"></i>
-          </div>
-          <div className="loading-logo-text">
-            <span className="loading-letter">Y</span>
-            <span className="loading-letter">C</span>
-          </div>
-        </div>
 
         {/* Name */}
         <h1 className="loading-name">Yaman Chapagain</h1>

@@ -29,7 +29,7 @@ const Navbar = ({ activeSection, navigation }) => {
     <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-container">
         <a href="#home" className="navbar-logo" onClick={(e) => handleNavClick(e, 'home')}>
-          Yaman Jr
+          Yaman
         </a>
         <div className="navbar-right">
           <div className={`navbar-menu ${isMobileMenuOpen ? 'active' : ''}`}>

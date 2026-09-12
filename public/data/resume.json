@@ -63,7 +63,7 @@
   },
   {
     "id": 5,
-    "degree": "Bachelor's Degree (In Progress)",
+    "degree": "Bachelor's (BSC.CSIT)",
     "institution": "N/A",
     "location": "Nepal",
     "graduationYear": "in progress"
@@ -71,14 +71,14 @@
   ],
   "certifications": [
     {
-      "name": "Self-Taught Web Development",
-      "issuer": "Online Learning & Practice",
-      "year": "2024"
+      "name": "Participation in game development competition ",
+      "issuer": "Vishwa Adarsha College , Sunsari",
+      "year": "2025"
     },
     {
-      "name": "Video Editing Experience",
-      "issuer": "Personal Practice",
-      "year": "2020-Present"
+      "name": "2nd place in Webathon competition",
+      "issuer": "Madan Bhandari Memorial College , Morang",
+      "year": "2026"
     }
   ],
 

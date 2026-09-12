@@ -26,7 +26,7 @@
       "description": "An exciting 2D platformer game where you control a shark through various obstacles and challenges.",
       "image": "/assets/images/projects/shark-game.png",
       "techStack": ["HTML", "CSS", "Javascript"],
-      "liveUrl": "https://shark-game1.netlify.app/",
+      "liveUrl": "https://yamanjrexe.github.io/Shark-Game/",
       "githubUrl": "https://github.com//yamanjrexe/Shark-Game",
       "status": "live"
     },
@@ -49,19 +49,9 @@
     },
     {
       "id": 5,
-      "title": "Manga Hub - Manga Tracker",
-      "description": "Manga Hub is a comprehensive manga tracking application that allows users to browse, search, and manage their manga collections. With detailed information about each manga, users can track their reading progress and discover new titles.",
-      "image": "/assets/images/projects/manga-hub.png",
-      "techStack": ["HTML", "CSS", "Javascript"],
-      "liveUrl": "https://manga-hub1.netlify.app/",
-      "githubUrl": "https://github.com/yamanjrexe/Manga-Hub",
-      "status": "live"
-    },
-    {
-      "id": 6,
       "title": "AniSora – Anime Streaming Platform",
       "description": "AniSora is a full‑featured anime streaming platform. It provides a seamless experience with a modern UI, high‑quality streaming, and deep integration with AniList for watchlist synchronization. Users can sign in via Email, Google, or AniList OAuth, and manage their watchlist with real‑time updates.",
-      "image": "/assets/images/projects/anisora.png",
+      "image": "/assets/images/projects/",
       "techStack": [
         "React",
         "Supabase",
@@ -76,7 +66,7 @@
       "status": "development"
     },
     {
-      "id": 7,
+      "id": 6,
       "title": "Edu Sphere",
       "description": "Edu Sphere is a responsive educational web platform designed to deliver interactive learning resources through a clean and user-friendly interface.",
       "image": "/assets/images/projects/edu-sphere.png",
