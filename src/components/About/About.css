@@ -61,7 +61,7 @@
 }
 
 .card-icon i {
-  font-size: 24px;
+  font-size: var(--font-size-2xl);
 }
 
 .about-card-header h3 {
@@ -101,8 +101,9 @@
   min-width: 0;
 }
 
+/* Issue 1: was 28px */
 .about-name {
-  font-size: 28px;
+  font-size: var(--font-size-3xl);
   color: var(--color-text-primary);
   margin-bottom: 5px;
   min-height: 42px;
@@ -201,7 +202,7 @@
   position: absolute;
   top: -12px;
   left: 20px;
-  font-size: 24px;
+  font-size: var(--font-size-2xl);
   color: var(--color-primary);
   opacity: 0.3;
 }
@@ -267,7 +268,7 @@
 
 @media (max-width: 992px) {
   .about-name {
-    font-size: 24px;
+    font-size: var(--font-size-2xl);
     min-height: 36px;
   }
 
@@ -302,7 +303,7 @@
   }
 
   .about-name {
-    font-size: 24px;
+    font-size: var(--font-size-2xl);
     min-height: 36px;
   }
 
@@ -322,7 +323,7 @@
   }
 
   .about-name {
-    font-size: 22px;
+    font-size: var(--font-size-xl);
     min-height: 32px;
     justify-content: center;
   }
@@ -347,7 +348,7 @@
   }
 
   .card-icon i {
-    font-size: 20px;
+    font-size: var(--font-size-xl);
   }
 
   .about-card-header h3 {
@@ -374,6 +375,6 @@
 
 @media (max-width: 400px) {
   .about-name {
-    font-size: 20px;
+    font-size: var(--font-size-lg);
   }
 }

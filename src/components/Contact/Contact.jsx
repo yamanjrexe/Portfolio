@@ -1,4 +1,3 @@
-// components/Contact/Contact.jsx
 import React, { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import "./Contact.css";
@@ -18,16 +17,15 @@ const Contact = ({ id }) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastSubmission, setLastSubmission] = useState(0);
-  const RATE_LIMIT_MS = 60000; // 1 minute
+  const RATE_LIMIT_MS = 60000;
 
-  // EmailJS credentials from environment variables
   const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
   const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
   const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-  const EMAILJS_AUTOREPLY_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID;
+  const EMAILJS_AUTOREPLY_TEMPLATE_ID =
+    process.env.REACT_APP_EMAILJS_AUTOREPLY_TEMPLATE_ID;
 
   useEffect(() => {
-    // Initialize EmailJS
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
     fetch("/data/social.json")
@@ -52,9 +50,7 @@ const Contact = ({ id }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const getCurrentTime = () => {
@@ -68,7 +64,6 @@ const Contact = ({ id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Rate limiting check
     const now = Date.now();
     const timeSinceLastSubmission = now - lastSubmission;
 
@@ -79,7 +74,9 @@ const Contact = ({ id }) => {
       setFormStatus({
         submitted: true,
         success: false,
-        message: `⏳ Please wait ${waitSeconds} second${waitSeconds !== 1 ? "s" : ""} before sending another message.`,
+        message: `⏳ Please wait ${waitSeconds} second${
+          waitSeconds !== 1 ? "s" : ""
+        } before sending another message.`,
       });
       setTimeout(() => {
         setFormStatus((prev) => ({ ...prev, submitted: false }));
@@ -88,7 +85,6 @@ const Contact = ({ id }) => {
     }
 
     if (!validateForm()) return;
-
     setIsSubmitting(true);
 
     const adminParams = {
@@ -99,11 +95,9 @@ const Contact = ({ id }) => {
     };
 
     try {
-      // --- 1. Send Admin Notification (To YOU) ---
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, adminParams);
       console.log("✅ Admin notification sent");
 
-      // --- 2. Send Auto-Reply (To USER) ---
       const userReplyParams = {
         email: formData.email,
         name: formData.name,
@@ -117,7 +111,6 @@ const Contact = ({ id }) => {
         userReplyParams,
       );
       console.log("✅ Auto-reply sent to user");
-      console.log("📧 userReplyParams:", userReplyParams);
 
       setLastSubmission(now);
       setFormStatus({
@@ -129,7 +122,6 @@ const Contact = ({ id }) => {
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("❌ EmailJS Error:", error);
-
       setFormStatus({
         submitted: true,
         success: false,
@@ -202,7 +194,7 @@ const Contact = ({ id }) => {
                     >
                       yamanjrexe@gmail.com
                     </a>
-                    <CopyEmailButton email="jryaman100@gmail.com" />
+                    <CopyEmailButton email="yamanjrexe@gmail.com" />
                   </div>
                 </div>
               </div>
@@ -217,7 +209,6 @@ const Contact = ({ id }) => {
               </div>
             </div>
 
-            {/* WhatsApp Contact Card */}
             <div className="whatsapp-contact-card">
               <div className="whatsapp-contact-icon">
                 <i className="fab fa-whatsapp"></i>
@@ -266,10 +257,16 @@ const Contact = ({ id }) => {
 
               {formStatus.submitted && (
                 <div
-                  className={`form-message ${formStatus.success ? "success" : "error"}`}
+                  className={`form-message ${
+                    formStatus.success ? "success" : "error"
+                  }`}
                 >
                   <i
-                    className={`fas ${formStatus.success ? "fa-check-circle" : "fa-exclamation-circle"}`}
+                    className={`fas ${
+                      formStatus.success
+                        ? "fa-check-circle"
+                        : "fa-exclamation-circle"
+                    }`}
                   ></i>
                   <span>{formStatus.message}</span>
                 </div>
@@ -358,7 +355,6 @@ const Contact = ({ id }) => {
   );
 };
 
-// Copy Email Button Component
 const CopyEmailButton = ({ email }) => {
   const [copied, setCopied] = useState(false);
 
@@ -374,25 +370,10 @@ const CopyEmailButton = ({ email }) => {
 
   return (
     <button
+      type="button"
+      className="copy-email-btn"
       onClick={handleCopy}
-      style={{
-        background: "var(--gradient-primary)",
-        border: "none",
-        padding: "4px 12px",
-        borderRadius: "20px",
-        fontSize: "12px",
-        fontWeight: "500",
-        color: "white",
-        cursor: "pointer",
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "6px",
-        transition: "all 0.3s ease",
-      }}
-      onMouseEnter={(e) =>
-        (e.currentTarget.style.transform = "translateY(-2px)")
-      }
-      onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+      aria-label={copied ? "Email copied" : "Copy email address"}
     >
       <i className={`fas ${copied ? "fa-check" : "fa-copy"}`}></i>
       <span>{copied ? "Copied!" : "Copy"}</span>

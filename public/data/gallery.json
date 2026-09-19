@@ -1,1 +1,16 @@
-
+{
+  "images": [
+    {
+      "id": "g1",
+      "src": "/assets/images/icon.png",
+      "title": "Logo Icon",
+      "category": "icon"
+    },
+    {
+      "id": "g2",
+      "src": "/assets/images/profile/me.png",
+      "title": "Yaman Chapagain",
+      "category": "me"
+    }
+  ]
+}

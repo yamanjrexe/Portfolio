@@ -1,4 +1,3 @@
-// components/Projects/Projects.jsx
 import React, { useEffect, useState, useMemo } from "react";
 import "../Skeleton/Skeleton.css";
 import "./Projects.css";
@@ -95,22 +94,20 @@ const Projects = ({ id }) => {
     const maxVisible = 5;
     if (totalPages <= maxVisible) {
       for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else if (currentPage <= 3) {
+      for (let i = 1; i <= 4; i++) pages.push(i);
+      pages.push("...");
+      pages.push(totalPages);
+    } else if (currentPage >= totalPages - 2) {
+      pages.push(1);
+      pages.push("...");
+      for (let i = totalPages - 3; i <= totalPages; i++) pages.push(i);
     } else {
-      if (currentPage <= 3) {
-        for (let i = 1; i <= 4; i++) pages.push(i);
-        pages.push("...");
-        pages.push(totalPages);
-      } else if (currentPage >= totalPages - 2) {
-        pages.push(1);
-        pages.push("...");
-        for (let i = totalPages - 3; i <= totalPages; i++) pages.push(i);
-      } else {
-        pages.push(1);
-        pages.push("...");
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) pages.push(i);
-        pages.push("...");
-        pages.push(totalPages);
-      }
+      pages.push(1);
+      pages.push("...");
+      for (let i = currentPage - 1; i <= currentPage + 1; i++) pages.push(i);
+      pages.push("...");
+      pages.push(totalPages);
     }
     return pages;
   };
@@ -122,7 +119,6 @@ const Projects = ({ id }) => {
     { key: "completed", label: "Completed", icon: "fas fa-check-circle" },
   ];
 
-  // Skeleton Loader for horizontal layout
   const ProjectSkeleton = () => (
     <div className="skeleton-card-list">
       <div className="skeleton-image-list"></div>
@@ -191,23 +187,37 @@ const Projects = ({ id }) => {
                 "0",
               );
 
+              const imageEl = (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.src =
+                      "https://placehold.co/800x600/1e293b/8b5cf6?text=Project+Image";
+                  }}
+                />
+              );
+
               return (
                 <div key={project.id} className="project-card-list">
-                  {/* Left Side: Image */}
                   <div className="project-image-list">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.target.src =
-                          "https://placehold.co/800x600/1e293b/8b5cf6?text=Project+Image";
-                      }}
-                    />
+                    {isLiveUrlValid ? (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-image-link"
+                        aria-label={`Open ${project.title}`}
+                      >
+                        {imageEl}
+                      </a>
+                    ) : (
+                      imageEl
+                    )}
                     <div className="image-overlay"></div>
                   </div>
 
-                  {/* Right Side: Content */}
                   <div className="project-content-list">
                     <div className="project-header-list">
                       <span className="project-category">
@@ -296,7 +306,9 @@ const Projects = ({ id }) => {
                 ) : (
                   <button
                     key={page}
-                    className={`pagination-number ${currentPage === page ? "active" : ""}`}
+                    className={`pagination-number ${
+                      currentPage === page ? "active" : ""
+                    }`}
                     onClick={() => handlePageChange(page)}
                   >
                     {page}

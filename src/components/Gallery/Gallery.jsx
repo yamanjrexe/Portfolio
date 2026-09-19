@@ -1,4 +1,3 @@
-// components/Gallery/Gallery.jsx
 import React, { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
 import "./Gallery.css";
@@ -13,7 +12,7 @@ const Gallery = ({ id }) => {
     fetch("/data/gallery.json")
       .then((response) => response.json())
       .then((data) => {
-        setImages(data.images);
+        setImages(data.images || []);
         setLoading(false);
       })
       .catch((error) => {
@@ -29,6 +28,8 @@ const Gallery = ({ id }) => {
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
+
+  if (!loading && images.length === 0) return null;
 
   const categories = ["all", ...new Set(images.map((img) => img.category))];
 
@@ -47,7 +48,7 @@ const Gallery = ({ id }) => {
       <div className="container">
         <div className="section-header">
           <span className="section-subtitle">
-            <i className="fas fa-camera"></i> Moments & Memories
+            <i className="fas fa-camera"></i> Moments &amp; Memories
           </span>
           <h2 className="section-title">
             My <span className="gradient">Gallery</span>
@@ -55,7 +56,6 @@ const Gallery = ({ id }) => {
           <div className="section-line"></div>
         </div>
 
-        {/* Only show filters if there are images */}
         {!loading && images.length > 0 && categories.length > 2 && (
           <div className="gallery-filter">
             {categories.map((cat) => (
@@ -72,15 +72,7 @@ const Gallery = ({ id }) => {
 
         {loading ? (
           <div className="gallery-loading">Loading images...</div>
-        ) : filteredImages.length === 0 ? (
-          /* EMPTY STATE */
-          <div className="gallery-empty-state">
-            <i className="fas fa-images"></i>
-            <h3>No Images Currently</h3>
-            <p>Check back later for new photos and memories.</p>
-          </div>
         ) : (
-          /* MASONRY GRID */
           <Masonry
             breakpointCols={breakpointColumnsObj}
             className="my-masonry-grid"
@@ -119,6 +111,7 @@ const Gallery = ({ id }) => {
               <button
                 className="lightbox-close"
                 onClick={() => setSelectedImage(null)}
+                aria-label="Close image"
               >
                 <i className="fas fa-times"></i>
               </button>

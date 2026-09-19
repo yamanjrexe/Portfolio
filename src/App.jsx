@@ -7,28 +7,29 @@ import About from "./components/About/About";
 import Skills from "./components/Skills/Skills";
 import Projects from "./components/Projects/Projects";
 import Resume from "./components/Resume/Resume";
-import Gallery from "./components/Gallery/Gallery"; // <-- Import Gallery
+import Gallery from "./components/Gallery/Gallery";
 import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import BackToTop from "./components/BackToTop/BackToTop";
 import Loading from "./components/Loading/Loading";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import WhatsApp from "./components/WhatsApp/WhatsApp";
+import { ScrollProgress } from "./components/core/ScrollProgress";
 import { useScrollActive } from "./hooks/useScrollActive";
 
 function App() {
   const [config, setConfig] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
+  const [hasGallery, setHasGallery] = useState(false);
 
-  // Add 'gallery' to the section IDs
   const sectionIds = [
     "home",
     "about",
     "skills",
     "projects",
     "resume",
-    "gallery",
+    ...(hasGallery ? ["gallery"] : []),
     "contact",
   ];
   const activeSection = useScrollActive(showContent ? sectionIds : []);
@@ -36,9 +37,7 @@ function App() {
   useEffect(() => {
     fetch("/data/config.json")
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to load config");
-        }
+        if (!response.ok) throw new Error("Failed to load config");
         return response.json();
       })
       .then((data) => {
@@ -51,6 +50,15 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    fetch("/data/gallery.json")
+      .then((r) => r.json())
+      .then((d) =>
+        setHasGallery(Array.isArray(d.images) && d.images.length > 0),
+      )
+      .catch(() => setHasGallery(false));
+  }, []);
+
   const handleLoadingComplete = () => {
     setShowContent(true);
     setTimeout(() => {
@@ -58,9 +66,7 @@ function App() {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("active");
-            }
+            if (entry.isIntersecting) entry.target.classList.add("active");
           });
         },
         { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
@@ -77,14 +83,20 @@ function App() {
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
-          background: "var(--color-background)",
-          color: "var(--color-error)",
+          background: "var(--bg)",
+          color: "var(--danger)",
         }}
       >
         Failed to load configuration
       </div>
     );
   }
+
+  const filteredNavigation = config
+    ? (config.navigation || []).filter(
+        (item) => item.id !== "gallery" || hasGallery,
+      )
+    : [];
 
   return (
     <ThemeProvider>
@@ -96,14 +108,15 @@ function App() {
         className="app"
         style={{
           opacity: showContent ? 1 : 0,
-          transition: "opacity 0.5s ease",
+          transition: "opacity 0.4s ease",
         }}
       >
         {config && (
           <>
+            <ScrollProgress />
             <Navbar
               activeSection={activeSection}
-              navigation={config.navigation}
+              navigation={filteredNavigation}
             />
             <main>
               <Hero id="home" />
@@ -111,7 +124,7 @@ function App() {
               <Skills id="skills" />
               <Projects id="projects" />
               <Resume id="resume" />
-              <Gallery id="gallery" /> {/* <-- Add Gallery Here */}
+              {hasGallery && <Gallery id="gallery" />}
               <Contact id="contact" />
             </main>
             <Footer />

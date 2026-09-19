@@ -38,7 +38,7 @@
    LOGO
    ========================================= */
 .navbar-logo {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
   text-decoration: none;
   background: var(--gradient-primary);
@@ -49,13 +49,10 @@
   position: relative;
 }
 
-/* =========================================
-   RIGHT SIDE WRAPPER (Menu + Toggle + Theme)
-   ========================================= */
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: 1.5rem;
 }
 
 /* =========================================
@@ -137,7 +134,6 @@
   transform-origin: center;
 }
 
-/* Hamburger → X animation */
 .navbar-toggle.active span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
@@ -170,11 +166,14 @@
     padding: 0.6rem 1.25rem;
   }
 
+  .navbar-right {
+    gap: var(--spacing-sm);
+  }
+
   .navbar-toggle {
     display: flex;
   }
 
-  /* Fullscreen overlay menu */
   .navbar-menu {
     position: fixed;
     top: 0;
@@ -210,15 +209,14 @@
     pointer-events: all;
   }
 
-  /* Individual link styling */
   .navbar-link {
     width: auto;
     min-width: 200px;
     text-align: center;
     padding: 1rem 2rem;
     border-radius: var(--border-radius-full);
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
     color: var(--color-text-primary);
     transform: translateY(30px);
     opacity: 0;
@@ -237,7 +235,6 @@
     color: #0f172a;
   }
 
-  /* Staggered entrance when opening */
   .navbar-menu.active .navbar-link {
     transform: translateY(0);
     opacity: 1;
@@ -287,9 +284,6 @@
   }
 }
 
-/* =========================================
-   BODY SCROLL LOCK (when menu is open)
-   ========================================= */
 body.menu-open {
   overflow: hidden;
   position: fixed;
@@ -297,16 +291,13 @@ body.menu-open {
   height: 100%;
 }
 
-/* =========================================
-   SMALL PHONES
-   ========================================= */
 @media (max-width: 480px) {
   .navbar-container {
     padding: 0.65rem 1rem;
   }
 
   .navbar-logo {
-    font-size: 1.25rem;
+    font-size: var(--font-size-xl);
   }
 
   .navbar-toggle {
@@ -333,15 +324,12 @@ body.menu-open {
   }
 
   .navbar-link {
-    font-size: 1.125rem;
+    font-size: var(--font-size-lg);
     padding: 0.875rem 1.5rem;
     min-width: 180px;
   }
 }
 
-/* =========================================
-   TINY PHONES
-   ========================================= */
 @media (max-width: 360px) {
   .navbar {
     top: 8px;
@@ -354,11 +342,11 @@ body.menu-open {
   }
 
   .navbar-logo {
-    font-size: 1.1rem;
+    font-size: var(--font-size-lg);
   }
 
   .navbar-link {
-    font-size: 1rem;
+    font-size: var(--font-size-md);
     padding: 0.75rem 1.25rem;
     min-width: 160px;
   }

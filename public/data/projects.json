@@ -15,23 +15,13 @@
       "title": "AniPulse - Anime Tracker",
       "description": "AniPulse is a modern, feature-rich anime tracker that helps you manage your watchlist, track progress, analyze detailed statistics, and celebrate your anime journey.",
       "image": "/assets/images/projects/ani-pulse.png",
-      "techStack": ["HTML", "CSS", "Javascript", "Node.js", "Firebase"],
+      "techStack": ["React", "CSS", "Node.js", "Firebase", "AnilistAPI"],
       "liveUrl": "https://ani-pulse.netlify.app/",
       "githubUrl": "https://github.com/yamanjrexe/AniPulse",
       "status": "live"
     },
     {
       "id": 3,
-      "title": "Shark Game - 2D Platformer",
-      "description": "An exciting 2D platformer game where you control a shark through various obstacles and challenges.",
-      "image": "/assets/images/projects/shark-game.png",
-      "techStack": ["HTML", "CSS", "Javascript"],
-      "liveUrl": "https://yamanjrexe.github.io/Shark-Game/",
-      "githubUrl": "https://github.com//yamanjrexe/Shark-Game",
-      "status": "live"
-    },
-    {
-      "id": 4,
       "title": "Regina Shoe Center - E-commerce Website",
       "description": "Regina Shoe Center is a modern e-commerce platform for selling shoes online. With a user-friendly interface and seamless shopping experience, customers can easily browse, select, and purchase their favorite footwear.",
       "image": "/assets/images/projects/regina-shoe.png",
@@ -44,11 +34,11 @@
         "Firebase"
       ],
       "liveUrl": "#",
-      "githubUrl": "https://github.com/yamanjrexe/Regina-Shoe-Center",
+      "githubUrl": "https://github.com/yamanjrexe/Reginashoecenter",
       "status": "development"
     },
     {
-      "id": 5,
+      "id": 4,
       "title": "AniSora – Anime Streaming Platform",
       "description": "AniSora is a full‑featured anime streaming platform. It provides a seamless experience with a modern UI, high‑quality streaming, and deep integration with AniList for watchlist synchronization. Users can sign in via Email, Google, or AniList OAuth, and manage their watchlist with real‑time updates.",
       "image": "/assets/images/projects/",
@@ -66,13 +56,23 @@
       "status": "development"
     },
     {
-      "id": 6,
+      "id": 5,
       "title": "Edu Sphere",
       "description": "Edu Sphere is a responsive educational web platform designed to deliver interactive learning resources through a clean and user-friendly interface.",
       "image": "/assets/images/projects/edu-sphere.png",
       "techStack": ["Html", "Js", "Css"],
       "liveUrl": "https://edu-sphere1.netlify.app/",
       "githubUrl": "https://github.com/yamanjrexe/edusphere",
+      "status": "live"
+    },
+    {
+      "id": 6,
+      "title": "Portfolio site",
+      "description": "The site you're on. Built with React and plain CSS, no UI framework. Ships with light/dark theme, filterable project list, and a contact form that sends email and an auto-reply through EmailJS.",
+      "image": "/assets/images/projects/portfoilo.png",
+      "techStack": ["React", "CSS", "Email js" ],
+      "liveUrl": "https://yamanchapagain.com.np",
+      "githubUrl": "https://github.com/yamanjrexe/portfolio",
       "status": "live"
     }
   ]
