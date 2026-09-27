@@ -74,6 +74,26 @@
       "liveUrl": "https://yamanchapagain.com.np",
       "githubUrl": "https://github.com/yamanjrexe/portfolio",
       "status": "live"
+    },
+    {
+      "id": 7,
+      "title": "Tic Tac Toe",
+      "description": "Browser game with a Minimax-powered AI opponent, three difficulty levels, and match score tracking. Scores and the last 20 matches persist between visits using localStorage.",
+      "image": "/assets/images/projects/tic-tac-toe.png",
+      "techStack": ["HTML", "CSS", "JavaScript"],
+      "liveUrl": "https://yamanjrexe.github.io/Tic-Tac-Toe",
+      "githubUrl": "https://github.com/yamanjrexe/Tic-Tac-Toe",
+      "status": "live"
+    },
+    {
+      "id": 8,
+      "title": "The Cube",
+      "description": "A browser-based Rubik's cube you can twist with a mouse or touch. Supports 2x2 through 5x5, three flip animations, camera FOV control, a scramble generator, and five color themes with an HSL editor. Solves and best times save to localStorage.",
+      "image": "/assets/images/projects/the-cube.png",
+      "techStack": ["JavaScript", "Three.js", "CSS"],
+      "liveUrl": "https://yamanjrexe.github.io/The-Cube",
+      "githubUrl": "https://github.com/yamanjrexe/The-Cube",
+      "status": "live"
     }
   ]
 }
