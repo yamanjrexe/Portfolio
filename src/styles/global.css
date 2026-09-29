@@ -8,8 +8,9 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
-  overflow-x: clip;
+  overflow-x: hidden;
   width: 100%;
+  max-width: 100%;
 }
 
 body {
@@ -20,23 +21,36 @@ body {
   line-height: var(--lh-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: clip;
+  overflow-x: hidden;
   width: 100%;
+  max-width: 100%;
+  position: relative;
   transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .app {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--bg);
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 main {
   flex: 1;
   width: 100%;
+  max-width: 100%;
   padding-top: var(--header-height);
+  overflow-x: hidden;
 }
 
 h1,
@@ -74,13 +88,18 @@ p {
   margin-bottom: var(--space-4);
   color: var(--text-secondary);
   line-height: var(--lh-relaxed);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 p:last-child {
   margin-bottom: 0;
 }
 
-img {
+img,
+video,
+canvas,
+svg {
   max-width: 100%;
   height: auto;
   display: block;
@@ -99,6 +118,7 @@ a:hover {
 button {
   font-family: inherit;
   cursor: pointer;
+  max-width: 100%;
 }
 
 .container {
@@ -106,6 +126,7 @@ button {
   margin: 0 auto;
   padding: 0 var(--container-padding);
   width: 100%;
+  box-sizing: border-box;
 }
 
 .section {
@@ -113,6 +134,8 @@ button {
   position: relative;
   background: var(--bg);
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .section-header {
@@ -152,6 +175,10 @@ button {
   background: var(--accent);
   margin: 0 auto;
   border-radius: var(--radius-full);
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--header-height) + 12px);
 }
 
 ::-webkit-scrollbar {

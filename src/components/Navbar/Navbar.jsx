@@ -8,23 +8,46 @@ const Navbar = ({ activeSection, navigation }) => {
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle("menu-open", isMobileMenuOpen);
-    return () => document.body.classList.remove("menu-open");
+    if (isMobileMenuOpen) {
+      document.body.classList.add("menu-open");
+    } else {
+      document.body.classList.remove("menu-open");
+    }
   }, [isMobileMenuOpen]);
 
   const handleNavClick = (e, id) => {
     e.preventDefault();
+
+    document.body.classList.remove("menu-open");
+    setIsMobileMenuOpen(false);
+
     const element = document.getElementById(id);
     if (!element) return;
-    const offset = 72;
-    const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top, behavior: "smooth" });
-    setIsMobileMenuOpen(false);
+
+    const headerHeight =
+      parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--header-height",
+        ),
+        10,
+      ) || 72;
+
+    const buffer = 8;
+    const top =
+      element.getBoundingClientRect().top +
+      window.pageYOffset -
+      headerHeight -
+      buffer;
+
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    });
   };
 
   return (
