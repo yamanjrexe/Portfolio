@@ -1,311 +1,304 @@
 .resume {
-  padding: var(--spacing-5xl) 0;
-  background: var(--color-background);
-  position: relative;
+  padding: var(--space-8) 0;
+  background: var(--bg);
 }
 
-.resume::before {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.resume-summary-card {
-  background: var(--color-surface);
-  border-radius: var(--border-radius-xl);
-  padding: var(--spacing-2xl);
-  margin-bottom: var(--spacing-3xl);
-  border: 1px solid var(--color-border-light);
+.resume-summary {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: var(--spacing-2xl);
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-6);
   flex-wrap: wrap;
 }
 
 .resume-summary-text {
-  color: var(--color-text-secondary);
-  line-height: 1.8;
-  font-size: var(--font-size-md);
   flex: 1;
-  min-width: 250px;
+  min-width: 240px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-relaxed);
+  margin: 0;
 }
 
 .resume-actions {
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--space-2);
   flex-wrap: wrap;
 }
 
 .resume-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 0.875rem 1.5rem;
-  border-radius: var(--border-radius-full);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  gap: 6px;
+  padding: 0.55rem 1rem;
+  min-height: 40px;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
   text-decoration: none;
-  transition: all var(--transition-normal);
-  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.resume-btn i {
+  font-size: 13px;
 }
 
 .resume-btn-primary {
-  background: var(--gradient-primary);
-  color: white;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
 }
 
 .resume-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--accent-contrast);
 }
 
 .resume-btn-secondary {
-  background: var(--color-surface-alt);
-  color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border-strong);
 }
 
 .resume-btn-secondary:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-  transform: translateY(-2px);
+  background: var(--surface-alt);
 }
 
 .resume-tabs {
   display: flex;
   justify-content: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-3xl);
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
   flex-wrap: wrap;
 }
 
 .resume-tab {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 0.875rem 2rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--border-radius-full);
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: all var(--transition-normal);
+  gap: 6px;
+  padding: 0.5rem 1rem;
+  min-height: 36px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .resume-tab i {
-  font-size: 14px;
+  font-size: 12px;
 }
 
-.resume-tab:hover,
+.resume-tab:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
 .resume-tab.active {
-  background: var(--gradient-primary);
-  color: white;
-  border-color: transparent;
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
 }
 
 .resume-panel {
   display: none;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all var(--transition-normal);
 }
 
 .resume-panel.active {
   display: block;
-  animation: fadeInUp 0.6s forwards;
 }
 
 .timeline {
-  position: relative;
-  max-width: 800px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
 .timeline-item {
   display: flex;
-  gap: var(--spacing-xl);
-  margin-bottom: var(--spacing-2xl);
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
 }
 
 .timeline-marker {
   position: relative;
-  width: 40px;
+  width: 12px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-shrink: 0;
+  padding-top: 8px;
 }
 
 .timeline-dot {
-  width: 12px;
-  height: 12px;
-  background: var(--gradient-primary);
-  border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
 }
 
 .timeline-line {
   position: absolute;
   top: 20px;
-  width: 2px;
-  height: calc(100% + var(--spacing-2xl));
-  background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
-  opacity: 0.3;
+  width: 1px;
+  height: calc(100% + var(--space-5));
+  background: var(--border);
 }
 
 .timeline-card {
   flex: 1;
-  background: var(--color-surface);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-xl);
-  border: 1px solid var(--color-border-light);
-  transition: all var(--transition-normal);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   min-width: 0;
 }
 
-.timeline-card:hover {
-  transform: translateX(10px);
-  border-color: var(--color-primary);
+.timeline-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+  flex-wrap: wrap;
 }
 
 .timeline-title {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-xs);
+  font-size: var(--text-base);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  margin: 0 0 2px;
 }
 
 .timeline-company {
-  color: var(--color-primary);
-  font-weight: var(--font-weight-medium);
-  margin-bottom: var(--spacing-sm);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 .timeline-date {
-  display: inline-block;
-  padding: 0.25rem 1rem;
-  background: rgba(99, 102, 241, 0.1);
-  border-radius: var(--border-radius-full);
-  font-size: var(--font-size-xs);
-  color: var(--color-primary);
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .timeline-description {
-  color: var(--color-text-secondary);
-  margin: var(--spacing-md) 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-normal);
+  margin: var(--space-3) 0;
 }
 
 .timeline-achievements {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .timeline-achievements li {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: var(--spacing-sm);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-normal);
+  margin-bottom: var(--space-2);
+}
+
+.timeline-achievements li:last-child {
+  margin-bottom: 0;
 }
 
 .timeline-achievements li i {
-  color: var(--color-primary);
-  font-size: 12px;
+  color: var(--accent);
+  font-size: 11px;
+  margin-top: 6px;
+  flex-shrink: 0;
 }
 
 .education-grid,
 .certifications-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: var(--spacing-xl);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .education-card,
 .certification-card {
   display: flex;
-  gap: var(--spacing-lg);
-  background: var(--color-surface);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-xl);
-  border: 1px solid var(--color-border-light);
-  transition: all var(--transition-normal);
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast);
 }
 
 .education-card:hover,
 .certification-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--color-secondary);
+  border-color: var(--border-strong);
 }
 
-.education-card-icon,
+.education-icon,
 .certification-icon {
-  width: 50px;
-  height: 50px;
-  background: rgba(6, 182, 212, 0.1);
-  border-radius: var(--border-radius-lg);
+  width: 40px;
+  height: 40px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-secondary);
   flex-shrink: 0;
 }
 
-.education-card-icon i,
+.education-icon i,
 .certification-icon i {
-  font-size: 24px;
+  font-size: 16px;
 }
 
 .education-degree,
 .certification-name {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-xs);
+  font-size: var(--text-base);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  margin: 0 0 4px;
 }
 
 .education-institution,
 .certification-issuer {
-  color: var(--color-secondary);
-  font-weight: var(--font-weight-medium);
-  margin-bottom: var(--spacing-sm);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0 0 4px;
 }
 
-/* Responsive */
-@media (min-width: 1440px) {
-  .timeline {
-    max-width: 900px;
-  }
-
-  .education-grid,
-  .certifications-grid {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+.education-year,
+.certification-year {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin: 0;
 }
 
-@media (max-width: 1100px) {
-  .resume-summary-card {
-    padding: var(--spacing-xl);
-    gap: var(--spacing-xl);
-  }
-}
-
-@media (max-width: 992px) {
-
-  .education-grid,
-  .certifications-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .resume-summary-card {
+@media (max-width: 640px) {
+  .resume-summary {
     flex-direction: column;
     text-align: center;
   }
@@ -316,97 +309,6 @@
   }
 
   .timeline-item {
-    flex-direction: column;
-  }
-
-  .timeline-marker {
-    display: none;
-  }
-
-  .education-card,
-  .certification-card {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-@media (max-width: 576px) {
-  .resume-summary-card {
-    padding: var(--spacing-lg);
-    gap: var(--spacing-lg);
-  }
-
-  .resume-summary-text {
-    font-size: var(--font-size-sm);
-  }
-
-  .resume-actions {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .resume-btn {
-    width: 100%;
-    justify-content: center;
-    padding: 0.75rem 1.25rem;
-    font-size: var(--font-size-sm);
-  }
-
-  .resume-tabs {
-    gap: var(--spacing-sm);
-  }
-
-  .resume-tab {
-    padding: 0.625rem 1.25rem;
-    font-size: var(--font-size-sm);
-    width: 100%;
-    justify-content: center;
-  }
-
-  .timeline-card {
-    padding: var(--spacing-lg);
-  }
-
-  .timeline-title {
-    font-size: var(--font-size-md);
-  }
-
-  .timeline-company,
-  .timeline-description {
-    font-size: var(--font-size-sm);
-  }
-
-  .timeline-achievements li {
-    font-size: var(--font-size-xs);
-  }
-
-  .education-card,
-  .certification-card {
-    padding: var(--spacing-lg);
-  }
-
-  .education-degree,
-  .certification-name {
-    font-size: var(--font-size-md);
-  }
-
-  .education-institution,
-  .certification-issuer {
-    font-size: var(--font-size-sm);
-  }
-}
-
-@media (max-width: 360px) {
-  .resume-summary-card {
-    padding: var(--spacing-md);
-  }
-
-  .timeline-card {
-    padding: var(--spacing-md);
-  }
-
-  .education-card,
-  .certification-card {
-    padding: var(--spacing-md);
+    gap: var(--space-3);
   }
 }

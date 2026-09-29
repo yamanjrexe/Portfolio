@@ -1,47 +1,70 @@
-// Navbar.jsx - Updated with Font Awesome
-import React, { useState, useEffect } from 'react';
-import ThemeToggle from '../ThemeToggle/ThemeToggle';
-import './Navbar.css';
+import React, { useState, useEffect } from "react";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import "./Navbar.css";
 
 const Navbar = ({ activeSection, navigation }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("menu-open", isMobileMenuOpen);
+    return () => document.body.classList.remove("menu-open");
+  }, [isMobileMenuOpen]);
 
   const handleNavClick = (e, id) => {
     e.preventDefault();
     const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
-    }
+    if (!element) return;
+    const offset = 72;
+    const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+    setIsMobileMenuOpen(false);
   };
 
   return (
-    <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
+    <nav className={`navbar ${isScrolled ? "navbar-scrolled" : ""}`}>
       <div className="navbar-container">
-        <a href="#home" className="navbar-logo" onClick={(e) => handleNavClick(e, 'home')}>
-          Yaman
+        <a
+          href="#home"
+          className="navbar-logo"
+          onClick={(e) => handleNavClick(e, "home")}
+        >
+          Yaman Chapagain
         </a>
+
         <div className="navbar-right">
-          <div className={`navbar-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+          <div className={`navbar-menu ${isMobileMenuOpen ? "active" : ""}`}>
             {navigation.map((item) => (
-              <a key={item.id} href={item.href} className={`navbar-link ${activeSection === item.id ? 'active' : ''}`} onClick={(e) => handleNavClick(e, item.id)}>
+              <a
+                key={item.id}
+                href={item.href}
+                className={`navbar-link ${
+                  activeSection === item.id ? "active" : ""
+                }`}
+                onClick={(e) => handleNavClick(e, item.id)}
+              >
                 {item.label}
               </a>
             ))}
           </div>
+
           <ThemeToggle />
-          <button className={`navbar-toggle ${isMobileMenuOpen ? 'active' : ''}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle menu">
-            <span></span><span></span><span></span>
+
+          <button
+            className={`navbar-toggle ${isMobileMenuOpen ? "active" : ""}`}
+            onClick={() => setIsMobileMenuOpen((v) => !v)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
         </div>
       </div>

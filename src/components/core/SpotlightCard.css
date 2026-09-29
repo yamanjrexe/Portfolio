@@ -1,0 +1,31 @@
+.spotlight-card {
+    position: relative;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    overflow: hidden;
+    padding: var(--space-5);
+    transition: border-color var(--transition-fast);
+}
+
+.spotlight-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+            var(--spotlight-color, rgba(200, 16, 46, 0.15)),
+            transparent 40%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.spotlight-card:hover::before {
+    opacity: 1;
+}
+
+.spotlight-card>* {
+    position: relative;
+    z-index: 1;
+}

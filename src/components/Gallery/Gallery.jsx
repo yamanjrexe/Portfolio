@@ -10,13 +10,13 @@ const Gallery = ({ id }) => {
 
   useEffect(() => {
     fetch("/data/gallery.json")
-      .then((response) => response.json())
+      .then((r) => r.json())
       .then((data) => {
         setImages(data.images || []);
         setLoading(false);
       })
-      .catch((error) => {
-        console.error("Error loading gallery:", error);
+      .catch((err) => {
+        console.error("Error loading gallery:", err);
         setLoading(false);
       });
   }, []);
@@ -32,7 +32,6 @@ const Gallery = ({ id }) => {
   if (!loading && images.length === 0) return null;
 
   const categories = ["all", ...new Set(images.map((img) => img.category))];
-
   const filteredImages =
     filter === "all" ? images : images.filter((img) => img.category === filter);
 
@@ -47,21 +46,19 @@ const Gallery = ({ id }) => {
     <section id={id} className="gallery reveal">
       <div className="container">
         <div className="section-header">
-          <span className="section-subtitle">
-            <i className="fas fa-camera"></i> Moments &amp; Memories
-          </span>
-          <h2 className="section-title">
-            My <span className="gradient">Gallery</span>
-          </h2>
-          <div className="section-line"></div>
+          <span className="section-subtitle">Gallery</span>
+          <h2 className="section-title">Photos and screenshots</h2>
+          <div className="section-line" />
         </div>
 
-        {!loading && images.length > 0 && categories.length > 2 && (
+        {!loading && categories.length > 2 && (
           <div className="gallery-filter">
             {categories.map((cat) => (
               <button
                 key={cat}
-                className={`gallery-filter-btn ${filter === cat ? "active" : ""}`}
+                className={`gallery-filter-btn ${
+                  filter === cat ? "active" : ""
+                }`}
                 onClick={() => setFilter(cat)}
               >
                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -71,7 +68,9 @@ const Gallery = ({ id }) => {
         )}
 
         {loading ? (
-          <div className="gallery-loading">Loading images...</div>
+          <p style={{ textAlign: "center", color: "var(--text-muted)" }}>
+            Loading images…
+          </p>
         ) : (
           <Masonry
             breakpointCols={breakpointColumnsObj}
@@ -90,7 +89,7 @@ const Gallery = ({ id }) => {
                   loading="lazy"
                   onError={(e) => {
                     e.target.src =
-                      "https://placehold.co/600x400/1e293b/8b5cf6?text=Image+Not+Found";
+                      "https://placehold.co/600x400/1a1a1d/e63946?text=Image";
                   }}
                 />
                 <div className="gallery-overlay">
@@ -113,7 +112,7 @@ const Gallery = ({ id }) => {
                 onClick={() => setSelectedImage(null)}
                 aria-label="Close image"
               >
-                <i className="fas fa-times"></i>
+                <i className="fas fa-times" aria-hidden="true" />
               </button>
               <img src={selectedImage.src} alt={selectedImage.title} />
               <div className="lightbox-caption">

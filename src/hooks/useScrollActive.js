@@ -1,55 +1,48 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export const useScrollActive = (sectionIds) => {
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    // Function to determine active section
-    const determineActiveSection = () => {
-      const scrollPosition = window.scrollY + 120; // Increased offset for header
-      
-      // Special case: at the very top of the page
+    if (!sectionIds || sectionIds.length === 0) return;
+
+    const determine = () => {
+      const scrollPosition = window.scrollY + 120;
+
       if (window.scrollY < 100) {
-        setActiveSection('home');
+        setActiveSection("home");
         return;
       }
 
-      // Check each section
-      for (const sectionId of sectionIds) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(sectionId);
-            return;
-          }
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const { offsetTop, offsetHeight } = el;
+        if (
+          scrollPosition >= offsetTop &&
+          scrollPosition < offsetTop + offsetHeight
+        ) {
+          setActiveSection(id);
+          return;
         }
       }
 
-      // If no section is found (e.g., at the bottom), set the last section
-      const lastSection = document.getElementById(sectionIds[sectionIds.length - 1]);
-      if (lastSection && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 100) {
+      const last = document.getElementById(sectionIds[sectionIds.length - 1]);
+      if (
+        last &&
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 100
+      ) {
         setActiveSection(sectionIds[sectionIds.length - 1]);
       }
     };
 
-    // Run immediately on mount
-    determineActiveSection();
-
-    // Add scroll event listener
-    window.addEventListener('scroll', determineActiveSection);
-    
-    // Add resize event listener to recalculate on window resize
-    window.addEventListener('resize', determineActiveSection);
-    
-    // Cleanup
+    determine();
+    window.addEventListener("scroll", determine, { passive: true });
+    window.addEventListener("resize", determine);
     return () => {
-      window.removeEventListener('scroll', determineActiveSection);
-      window.removeEventListener('resize', determineActiveSection);
+      window.removeEventListener("scroll", determine);
+      window.removeEventListener("resize", determine);
     };
   }, [sectionIds]);
 

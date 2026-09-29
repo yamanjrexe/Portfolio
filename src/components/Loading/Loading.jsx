@@ -1,74 +1,68 @@
-// Loading.jsx - Modern Loading Screen (Fixed ESLint Warning)
-import React, { useEffect, useState } from 'react';
-import './Loading.css';
+import React, { useEffect, useState } from "react";
+import TextScramble from "../core/TextScramble";
+import "./Loading.css";
 
 const Loading = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
-  const [loadingText, setLoadingText] = useState('Initializing');
+  const [statusIndex, setStatusIndex] = useState(0);
 
-  const loadingMessages = [
-    'Initializing',
-    'Loading modules',
-    'Setting up environment',
-    'Preparing assets',
-    'Almost ready',
-    'Welcome!'
-  ];
+  const statuses = ["BOOTING", "LOADING ASSETS", "PREPARING VIEW", "READY"];
 
   useEffect(() => {
-    let textIndex = 0;
-    const textInterval = setInterval(() => {
-      textIndex++;
-      if (textIndex < loadingMessages.length) {
-        setLoadingText(loadingMessages[textIndex]);
-      }
-    }, 800);
-
-    const interval = setInterval(() => {
-      setProgress(prev => {
+    const id = setInterval(() => {
+      setProgress((prev) => {
         if (prev >= 100) {
-          clearInterval(interval);
-          clearInterval(textInterval);
+          clearInterval(id);
           setTimeout(() => {
             setFadeOut(true);
-            setTimeout(onLoadingComplete, 600);
-          }, 400);
+            setTimeout(onLoadingComplete, 300);
+          }, 200);
           return 100;
         }
-        return prev + 1;
+        return prev + 2;
       });
     }, 20);
-
-    return () => {
-      clearInterval(interval);
-      clearInterval(textInterval);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => clearInterval(id);
   }, [onLoadingComplete]);
 
-  return (
-    <div className={`loading-screen ${fadeOut ? 'fade-out' : ''}`}>
-      <div className="loading-content">
+  useEffect(() => {
+    const next = Math.min(
+      statuses.length - 1,
+      Math.floor((progress / 100) * statuses.length),
+    );
+    setStatusIndex(next);
+  }, [progress]);
 
-        {/* Name */}
-        <h1 className="loading-name">Yaman Chapagain</h1>
-        
-        {/* Animated Progress Bar */}
-        <div className="loading-bar-container">
-          <div className="loading-bar" style={{ width: `${progress}%` }}>
-            <div className="loading-bar-shimmer"></div>
-          </div>
+  return (
+    <div
+      className={`loading-screen ${fadeOut ? "fade-out" : ""}`}
+      role="status"
+      aria-live="polite"
+      aria-label={`Loading, ${progress} percent`}
+    >
+      <div className="loading-content">
+        <div className="loading-mark" aria-hidden="true">
+          Y
         </div>
-        
-        {/* Progress Percentage */}
-        <div className="loading-percentage">{progress}%</div>
-        
-        {/* Loading Message */}
-        <p className="loading-message">
-          <i className="fas fa-spinner fa-pulse"></i>
-          {loadingText}...
-        </p>
+
+        <TextScramble
+          as="h1"
+          className="loading-name"
+          speed={45}
+          revealDelay={4}
+        >
+          YAMAN CHAPAGAIN
+        </TextScramble>
+
+        <div className="loading-bar-track" aria-hidden="true">
+          <div className="loading-bar-fill" style={{ width: `${progress}%` }} />
+        </div>
+
+        <div className="loading-meta" aria-hidden="true">
+          <span className="loading-status">{statuses[statusIndex]}</span>
+          <span className="loading-percent">{progress}%</span>
+        </div>
       </div>
     </div>
   );

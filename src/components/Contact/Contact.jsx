@@ -9,7 +9,7 @@ const Contact = ({ id }) => {
     email: "",
     message: "",
   });
-  const [formStatus, setFormStatus] = useState({
+  const [status, setStatus] = useState({
     submitted: false,
     success: false,
     message: "",
@@ -27,24 +27,23 @@ const Contact = ({ id }) => {
 
   useEffect(() => {
     emailjs.init(EMAILJS_PUBLIC_KEY);
-
     fetch("/data/social.json")
-      .then((response) => response.json())
-      .then((data) => setSocial(data))
-      .catch((error) => console.error("Error loading social:", error));
+      .then((r) => r.json())
+      .then(setSocial)
+      .catch((err) => console.error("Error loading social:", err));
   }, [EMAILJS_PUBLIC_KEY]);
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required";
-    if (!formData.email.trim()) newErrors.email = "Email is required";
+  const validate = () => {
+    const next = {};
+    if (!formData.name.trim()) next.name = "Name is required";
+    if (!formData.email.trim()) next.email = "Email is required";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-      newErrors.email = "Please enter a valid email";
-    if (!formData.message.trim()) newErrors.message = "Message is required";
+      next.email = "Enter a valid email";
+    if (!formData.message.trim()) next.message = "Message is required";
     else if (formData.message.trim().length < 10)
-      newErrors.message = "Message must be at least 10 characters";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+      next.message = "Message must be at least 10 characters";
+    setErrors(next);
+    return Object.keys(next).length === 0;
   };
 
   const handleChange = (e) => {
@@ -53,86 +52,67 @@ const Contact = ({ id }) => {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const getCurrentTime = () => {
-    const now = new Date();
-    return now.toLocaleString("en-US", {
+  const getTime = () =>
+    new Date().toLocaleString("en-US", {
       dateStyle: "full",
       timeStyle: "medium",
     });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const now = Date.now();
-    const timeSinceLastSubmission = now - lastSubmission;
-
-    if (timeSinceLastSubmission < RATE_LIMIT_MS) {
-      const waitSeconds = Math.ceil(
-        (RATE_LIMIT_MS - timeSinceLastSubmission) / 1000,
-      );
-      setFormStatus({
+    const elapsed = now - lastSubmission;
+    if (elapsed < RATE_LIMIT_MS) {
+      const wait = Math.ceil((RATE_LIMIT_MS - elapsed) / 1000);
+      setStatus({
         submitted: true,
         success: false,
-        message: `⏳ Please wait ${waitSeconds} second${
-          waitSeconds !== 1 ? "s" : ""
-        } before sending another message.`,
+        message: `Please wait ${wait} second${wait !== 1 ? "s" : ""} before sending again.`,
       });
-      setTimeout(() => {
-        setFormStatus((prev) => ({ ...prev, submitted: false }));
-      }, 5000);
+      setTimeout(() => setStatus((p) => ({ ...p, submitted: false })), 5000);
       return;
     }
 
-    if (!validateForm()) return;
+    if (!validate()) return;
     setIsSubmitting(true);
 
-    const adminParams = {
-      name: formData.name,
-      email: formData.email,
-      message: formData.message,
-      time: getCurrentTime(),
-    };
+    const time = getTime();
 
     try {
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, adminParams);
-      console.log("✅ Admin notification sent");
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        time,
+      });
 
-      const userReplyParams = {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_AUTOREPLY_TEMPLATE_ID, {
         email: formData.email,
         name: formData.name,
         message: formData.message,
-        time: getCurrentTime(),
-      };
-
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_AUTOREPLY_TEMPLATE_ID,
-        userReplyParams,
-      );
-      console.log("✅ Auto-reply sent to user");
+        time,
+      });
 
       setLastSubmission(now);
-      setFormStatus({
+      setStatus({
         submitted: true,
         success: true,
         message:
-          "✓ Message sent! Check your email for a confirmation. I'll get back to you within 24 hours.",
+          "Message sent. A confirmation is on its way to your inbox. I'll reply within 24 hours.",
       });
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error("❌ EmailJS Error:", error);
-      setFormStatus({
+      console.error("EmailJS error:", error);
+      setStatus({
         submitted: true,
         success: false,
         message:
-          "✗ Failed to send message. Please try again or email me directly at yamanjrexe@gmail.com",
+          "Could not send the message. Please email yamanjrexe@gmail.com directly.",
       });
     } finally {
       setIsSubmitting(false);
-      setTimeout(() => {
-        setFormStatus((prev) => ({ ...prev, submitted: false }));
-      }, 5000);
+      setTimeout(() => setStatus((p) => ({ ...p, submitted: false })), 5000);
     }
   };
 
@@ -141,13 +121,13 @@ const Contact = ({ id }) => {
       <section id={id} className="contact">
         <div className="container">
           <div className="section-header">
-            <span className="section-subtitle">Get in touch</span>
-            <h2 className="section-title">Contact Me</h2>
-            <div className="section-line"></div>
+            <span className="section-subtitle">Contact</span>
+            <h2 className="section-title">Send a message</h2>
+            <div className="section-line" />
           </div>
-          <div style={{ textAlign: "center", padding: "40px" }}>
-            <i className="fas fa-spinner fa-pulse"></i> Loading...
-          </div>
+          <p style={{ textAlign: "center", color: "var(--text-muted)" }}>
+            Loading contact info…
+          </p>
         </div>
       </section>
     );
@@ -157,83 +137,71 @@ const Contact = ({ id }) => {
     <section id={id} className="contact reveal">
       <div className="container">
         <div className="section-header">
-          <span className="section-subtitle">
-            <i className="fas fa-envelope"></i> Get in touch
-          </span>
-          <h2 className="section-title">Let's Work Together</h2>
-          <div className="section-line"></div>
+          <span className="section-subtitle">Contact</span>
+          <h2 className="section-title">Send a message</h2>
+          <div className="section-line" />
         </div>
 
         <div className="contact-grid">
           <div className="contact-info">
             <h3 className="contact-info-title">Have a project in mind?</h3>
             <p className="contact-info-text">
-              I'm always interested in hearing about new opportunities and
-              creative projects. Let's collaborate and build something amazing
-              together!
+              Tell me what you&rsquo;re building and I&rsquo;ll reply within 24
+              hours.
             </p>
 
-            <div className="contact-details">
-              <div className="contact-detail-item">
-                <div className="contact-icon">
-                  <i className="fas fa-envelope"></i>
-                </div>
-                <div>
-                  <span className="contact-label">Email</span>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    <a
-                      href="mailto:yamanjrexe@gmail.com"
-                      className="contact-value"
-                    >
-                      yamanjrexe@gmail.com
-                    </a>
-                    <CopyEmailButton email="yamanjrexe@gmail.com" />
-                  </div>
-                </div>
+            <div className="contact-detail">
+              <div className="contact-icon">
+                <i className="fas fa-envelope" aria-hidden="true" />
               </div>
-              <div className="contact-detail-item">
-                <div className="contact-icon">
-                  <i className="fas fa-map-marker-alt"></i>
-                </div>
-                <div>
-                  <span className="contact-label">Location</span>
-                  <span className="contact-value">{social.location}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="whatsapp-contact-card">
-              <div className="whatsapp-contact-icon">
-                <i className="fab fa-whatsapp"></i>
-              </div>
-              <div className="whatsapp-contact-content">
-                <h4>Quick Chat on WhatsApp</h4>
-                <p>
-                  Get a faster response. Click below to start a conversation!
-                </p>
-                <a
-                  href="https://wa.me/+9779713512703?text=Hi%20Yaman%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="whatsapp-contact-btn"
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <span className="contact-label">Email</span>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    flexWrap: "wrap",
+                  }}
                 >
-                  <i className="fab fa-whatsapp"></i> Chat Now
-                </a>
+                  <a
+                    href="mailto:yamanjrexe@gmail.com"
+                    className="contact-value"
+                  >
+                    yamanjrexe@gmail.com
+                  </a>
+                  <CopyEmailButton email="yamanjrexe@gmail.com" />
+                </div>
               </div>
             </div>
 
-            <div>
-              <h4 className="social-title">Connect with me</h4>
-              <div className="social-grid">
-                {social.links &&
-                  social.links.map((link, index) => (
+            <div className="contact-detail">
+              <div className="contact-icon">
+                <i className="fas fa-map-marker-alt" aria-hidden="true" />
+              </div>
+              <div>
+                <span className="contact-label">Location</span>
+                <span className="contact-value">{social.location}</span>
+              </div>
+            </div>
+
+            <div className="contact-methods">
+              <a
+                href="https://wa.me/+9779713512703?text=Hi%20Yaman%2C%20I%27d%20like%20to%20talk%20about%20a%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-method whatsapp"
+              >
+                <i className="fab fa-whatsapp" aria-hidden="true" />
+                WhatsApp
+              </a>
+            </div>
+
+            {social.links && social.links.length > 0 && (
+              <>
+                <h4 className="social-title">Elsewhere</h4>
+                <div className="social-grid">
+                  {social.links.map((link, index) => (
                     <a
                       key={index}
                       href={link.url}
@@ -243,90 +211,86 @@ const Contact = ({ id }) => {
                     >
                       <i
                         className={`fab fa-${link.platform.toLowerCase()}`}
-                      ></i>
-                      <span className="social-platform">{link.platform}</span>
+                        aria-hidden="true"
+                      />
+                      <span>{link.platform}</span>
                     </a>
                   ))}
-              </div>
-            </div>
+                </div>
+              </>
+            )}
           </div>
 
-          <div className="contact-form-wrapper">
-            <form onSubmit={handleSubmit}>
-              <h3 className="form-title">Send a Message</h3>
+          <div className="contact-form">
+            <form onSubmit={handleSubmit} noValidate>
+              <h3 className="form-title">Message</h3>
 
-              {formStatus.submitted && (
+              {status.submitted && (
                 <div
                   className={`form-message ${
-                    formStatus.success ? "success" : "error"
+                    status.success ? "success" : "error"
                   }`}
+                  role="status"
                 >
                   <i
                     className={`fas ${
-                      formStatus.success
+                      status.success
                         ? "fa-check-circle"
                         : "fa-exclamation-circle"
                     }`}
-                  ></i>
-                  <span>{formStatus.message}</span>
+                    aria-hidden="true"
+                  />
+                  <span>{status.message}</span>
                 </div>
               )}
 
               <div className="form-group">
-                <label>
-                  <i className="fas fa-user"></i> Your Name
-                </label>
+                <label htmlFor="contact-name">Your name</label>
                 <input
+                  id="contact-name"
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="John Doe"
                   className={errors.name ? "error" : ""}
+                  autoComplete="name"
                 />
                 {errors.name && (
-                  <span className="error-message">
-                    <i className="fas fa-exclamation-circle"></i> {errors.name}
-                  </span>
+                  <span className="error-message">{errors.name}</span>
                 )}
               </div>
 
               <div className="form-group">
-                <label>
-                  <i className="fas fa-envelope"></i> Email Address
-                </label>
+                <label htmlFor="contact-email">Email</label>
                 <input
+                  id="contact-email"
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="john@example.com"
                   className={errors.email ? "error" : ""}
+                  autoComplete="email"
                 />
                 {errors.email && (
-                  <span className="error-message">
-                    <i className="fas fa-exclamation-circle"></i> {errors.email}
-                  </span>
+                  <span className="error-message">{errors.email}</span>
                 )}
               </div>
 
               <div className="form-group">
-                <label>
-                  <i className="fas fa-comment"></i> Message
-                </label>
+                <label htmlFor="contact-message">Message</label>
                 <textarea
+                  id="contact-message"
                   name="message"
                   rows="5"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell me about your project..."
+                  placeholder="What are you working on?"
                   className={errors.message ? "error" : ""}
-                ></textarea>
+                />
                 {errors.message && (
-                  <span className="error-message">
-                    <i className="fas fa-exclamation-circle"></i>{" "}
-                    {errors.message}
-                  </span>
+                  <span className="error-message">{errors.message}</span>
                 )}
               </div>
 
@@ -337,13 +301,16 @@ const Contact = ({ id }) => {
               >
                 {isSubmitting ? (
                   <>
-                    <i className="fas fa-spinner fa-pulse"></i>
-                    <span>Sending...</span>
+                    <i
+                      className="fas fa-circle-notch fa-spin"
+                      aria-hidden="true"
+                    />
+                    <span>Sending…</span>
                   </>
                 ) : (
                   <>
-                    <span>Send Message</span>
-                    <i className="fas fa-paper-plane"></i>
+                    <span>Send message</span>
+                    <i className="fas fa-paper-plane" aria-hidden="true" />
                   </>
                 )}
               </button>
@@ -371,12 +338,15 @@ const CopyEmailButton = ({ email }) => {
   return (
     <button
       type="button"
-      className="copy-email-btn"
+      className="contact-copy-btn"
       onClick={handleCopy}
-      aria-label={copied ? "Email copied" : "Copy email address"}
+      aria-label={copied ? "Email copied" : "Copy email"}
     >
-      <i className={`fas ${copied ? "fa-check" : "fa-copy"}`}></i>
-      <span>{copied ? "Copied!" : "Copy"}</span>
+      <i
+        className={`fas ${copied ? "fa-check" : "fa-copy"}`}
+        aria-hidden="true"
+      />
+      <span>{copied ? "Copied" : "Copy"}</span>
     </button>
   );
 };

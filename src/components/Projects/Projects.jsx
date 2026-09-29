@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import "../Skeleton/Skeleton.css";
+import SpotlightCard from "../core/SpotlightCard";
 import "./Projects.css";
 
 const Projects = ({ id }) => {
@@ -14,13 +14,13 @@ const Projects = ({ id }) => {
     if (savedFilter) setFilter(savedFilter);
 
     fetch("/data/projects.json")
-      .then((response) => response.json())
+      .then((r) => r.json())
       .then((data) => {
         setProjects(data.projects);
         setLoading(false);
       })
-      .catch((error) => {
-        console.error("Error loading projects:", error);
+      .catch((err) => {
+        console.error("Error loading projects:", err);
         setLoading(false);
       });
   }, []);
@@ -34,35 +34,15 @@ const Projects = ({ id }) => {
   const getStatusConfig = (status) => {
     switch (status) {
       case "live":
-        return {
-          label: "LIVE DEMO",
-          class: "status-live",
-          icon: "fas fa-play-circle",
-        };
+        return { label: "Live", class: "status-live" };
       case "development":
-        return {
-          label: "IN DEVELOPMENT",
-          class: "status-development",
-          icon: "fas fa-code-branch",
-        };
+        return { label: "In progress", class: "status-development" };
       case "completed":
-        return {
-          label: "COMPLETED",
-          class: "status-completed",
-          icon: "fas fa-check-circle",
-        };
+        return { label: "Completed", class: "status-completed" };
       case "coming-soon":
-        return {
-          label: "COMING SOON",
-          class: "status-coming-soon",
-          icon: "far fa-clock",
-        };
+        return { label: "Coming soon", class: "status-coming-soon" };
       default:
-        return {
-          label: "LIVE DEMO",
-          class: "status-live",
-          icon: "fas fa-play-circle",
-        };
+        return { label: "Live", class: "status-live" };
     }
   };
 
@@ -74,8 +54,10 @@ const Projects = ({ id }) => {
 
   const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentProjects = filteredProjects.slice(startIndex, endIndex);
+  const currentProjects = filteredProjects.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
 
   useEffect(() => {
     setCurrentPage(1);
@@ -83,10 +65,8 @@ const Projects = ({ id }) => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    window.scrollTo({
-      top: document.getElementById(id).offsetTop - 100,
-      behavior: "smooth",
-    });
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
   };
 
   const getPageNumbers = () => {
@@ -113,32 +93,20 @@ const Projects = ({ id }) => {
   };
 
   const statusFilters = [
-    { key: "all", label: "All Projects", icon: "fas fa-th-large" },
-    { key: "live", label: "Live Demo", icon: "fas fa-play-circle" },
-    { key: "development", label: "In Development", icon: "fas fa-code-branch" },
+    { key: "all", label: "All", icon: "fas fa-th-large" },
+    { key: "live", label: "Live", icon: "fas fa-play-circle" },
+    { key: "development", label: "In progress", icon: "fas fa-code-branch" },
     { key: "completed", label: "Completed", icon: "fas fa-check-circle" },
   ];
 
   const ProjectSkeleton = () => (
-    <div className="skeleton-card-list">
-      <div className="skeleton-image-list"></div>
-      <div className="skeleton-content-list">
-        <div className="skeleton-header-list">
-          <div className="skeleton-title-short"></div>
-          <div className="skeleton-index"></div>
-        </div>
-        <div className="skeleton-title"></div>
-        <div className="skeleton-text"></div>
-        <div className="skeleton-text short"></div>
-        <div className="skeleton-tags">
-          <div className="skeleton-tag"></div>
-          <div className="skeleton-tag"></div>
-          <div className="skeleton-tag"></div>
-        </div>
-        <div className="skeleton-footer-list">
-          <div className="skeleton-stat"></div>
-          <div className="skeleton-links"></div>
-        </div>
+    <div className="skeleton-card">
+      <div className="skeleton-image" />
+      <div className="skeleton-body">
+        <div className="skeleton-line sm" />
+        <div className="skeleton-line md" />
+        <div className="skeleton-line lg" />
+        <div className="skeleton-line lg" />
       </div>
     </div>
   );
@@ -147,33 +115,29 @@ const Projects = ({ id }) => {
     <section id={id} className="projects reveal">
       <div className="container">
         <div className="section-header">
-          <span className="section-subtitle">
-            <i className="fas fa-laptop-code"></i> My Creative Work
-          </span>
-          <h2 className="section-title">
-            Featured <span className="gradient">Projects</span>
-          </h2>
-          <div className="section-line"></div>
+          <span className="section-subtitle">Projects</span>
+          <h2 className="section-title">Things I&rsquo;ve built and shipped</h2>
+          <div className="section-line" />
         </div>
 
         <div className="projects-filter">
-          {statusFilters.map((filterType) => (
+          {statusFilters.map((f) => (
             <button
-              key={filterType.key}
-              className={`filter-btn ${filter === filterType.key ? "active" : ""}`}
-              onClick={() => handleFilterChange(filterType.key)}
+              key={f.key}
+              className={`filter-btn ${filter === f.key ? "active" : ""}`}
+              onClick={() => handleFilterChange(f.key)}
             >
-              <i className={filterType.icon}></i>
-              {filterType.label}
+              <i className={f.icon} aria-hidden="true" />
+              {f.label}
             </button>
           ))}
         </div>
 
-        <div className="projects-list stagger-children">
+        <div className="projects-list">
           {loading ? (
             Array(6)
               .fill()
-              .map((_, index) => <ProjectSkeleton key={`skeleton-${index}`} />)
+              .map((_, i) => <ProjectSkeleton key={i} />)
           ) : currentProjects.length > 0 ? (
             currentProjects.map((project, index) => {
               const statusConfig = getStatusConfig(project.status);
@@ -181,109 +145,91 @@ const Projects = ({ id }) => {
                 project.liveUrl &&
                 project.liveUrl !== "not-found or not online yet" &&
                 project.liveUrl !== "#";
-
               const displayIndex = String(startIndex + index + 1).padStart(
                 2,
                 "0",
               );
 
-              const imageEl = (
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  onError={(e) => {
-                    e.target.src =
-                      "https://placehold.co/800x600/1e293b/8b5cf6?text=Project+Image";
-                  }}
-                />
-              );
-
               return (
-                <div key={project.id} className="project-card-list">
-                  <div className="project-image-list">
-                    {isLiveUrlValid ? (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-image-link"
-                        aria-label={`Open ${project.title}`}
-                      >
-                        {imageEl}
-                      </a>
-                    ) : (
-                      imageEl
-                    )}
-                    <div className="image-overlay"></div>
+                <SpotlightCard key={project.id} className="project-card">
+                  <div className="project-image-wrap">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.target.src =
+                          "https://placehold.co/800x500/1a1a1d/e63946?text=Project";
+                      }}
+                    />
                   </div>
 
-                  <div className="project-content-list">
-                    <div className="project-header-list">
+                  <div className="project-content">
+                    <div className="project-header">
                       <span className="project-category">
-                        {project.featured ? "FEATURED" : "PROJECT"}
+                        {project.featured ? "Featured" : "Project"}
                       </span>
                       <span className="project-index">{displayIndex}</span>
                     </div>
 
-                    <h3 className="project-title-list">{project.title}</h3>
-                    <p className="project-description-list">
-                      {project.description}
-                    </p>
+                    <h3 className="project-title">{project.title}</h3>
+                    <p className="project-description">{project.description}</p>
 
-                    <div className="project-tech-list">
+                    <div className="project-tech">
                       {project.techStack.slice(0, 4).map((tech, idx) => (
-                        <span key={idx} className="tech-tag-list">
+                        <span key={idx} className="tech-tag">
                           {tech}
                         </span>
                       ))}
                       {project.techStack.length > 4 && (
-                        <span className="tech-tag-list">
+                        <span className="tech-tag">
                           +{project.techStack.length - 4}
                         </span>
                       )}
                     </div>
 
-                    <div className="project-footer-list">
-                      <div
-                        className={`project-status-text ${statusConfig.class}`}
-                      >
-                        <span className="status-dot"></span>
+                    <div className="project-footer">
+                      <div className={`project-status ${statusConfig.class}`}>
+                        <span className="status-dot" />
                         {statusConfig.label}
                       </div>
 
-                      <div className="project-links-list">
+                      <div className="project-links">
                         {isLiveUrlValid && (
                           <a
                             href={project.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="project-link-list"
+                            className="project-link"
                           >
-                            View Project{" "}
-                            <i className="fas fa-arrow-up-right-from-square"></i>
+                            Preview
+                            <i
+                              className="fas fa-arrow-up-right-from-square"
+                              aria-hidden="true"
+                            />
                           </a>
                         )}
                         <a
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="project-link-list"
+                          className="project-link"
                         >
-                          <i className="fab fa-github"></i> Code
+                          <i className="fab fa-github" aria-hidden="true" />
+                          Code
                         </a>
                       </div>
                     </div>
                   </div>
-                </div>
+                </SpotlightCard>
               );
             })
           ) : (
             <div className="no-results">
               <div className="no-results-icon">
-                <i className="fas fa-folder-open"></i>
+                <i className="fas fa-folder-open" aria-hidden="true" />
               </div>
-              <h3>No projects found</h3>
+              <h3>No projects in this category</h3>
             </div>
           )}
         </div>
@@ -295,7 +241,8 @@ const Projects = ({ id }) => {
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
             >
-              <i className="fas fa-chevron-left"></i> Previous
+              <i className="fas fa-chevron-left" aria-hidden="true" />
+              Previous
             </button>
             <div className="pagination-numbers">
               {getPageNumbers().map((page, index) =>
@@ -306,9 +253,7 @@ const Projects = ({ id }) => {
                 ) : (
                   <button
                     key={page}
-                    className={`pagination-number ${
-                      currentPage === page ? "active" : ""
-                    }`}
+                    className={`pagination-number ${currentPage === page ? "active" : ""}`}
                     onClick={() => handlePageChange(page)}
                   >
                     {page}
@@ -321,15 +266,16 @@ const Projects = ({ id }) => {
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
             >
-              Next <i className="fas fa-chevron-right"></i>
+              Next
+              <i className="fas fa-chevron-right" aria-hidden="true" />
             </button>
           </div>
         )}
 
         {!loading && filteredProjects.length > 0 && (
           <div className="results-info">
-            Showing {startIndex + 1} -{" "}
-            {Math.min(endIndex, filteredProjects.length)} of{" "}
+            Showing {startIndex + 1} to{" "}
+            {Math.min(startIndex + itemsPerPage, filteredProjects.length)} of{" "}
             {filteredProjects.length} projects
           </div>
         )}

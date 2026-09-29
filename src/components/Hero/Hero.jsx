@@ -1,142 +1,155 @@
-// components/Hero/Hero.jsx
-import React, { useEffect, useState } from 'react';
-import './Hero.css';
+import React, { useEffect, useState } from "react";
+import GlowCursor from "../core/GlowCursor";
+import AnimatedNumber from "../core/AnimatedNumber";
+import { useTheme } from "../../context/ThemeContext";
+import "./Hero.css";
 
-const Hero = ({ id }) => {
+const STATS = [
+  { value: 2, suffix: "+", label: "Years coding" },
+  { value: 4, suffix: "+", label: "Years editing" },
+  { value: 10, suffix: "+", label: "Projects shipped" },
+];
+
+const Hero = ({ id, play = true }) => {
+  const { theme } = useTheme();
   const [profile, setProfile] = useState(null);
-  
-  // Typing animation states
-  const [displayRole, setDisplayRole] = useState('');
+  const [displayRole, setDisplayRole] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
+  const [typingSpeed, setTypingSpeed] = useState(120);
 
-  // Typing animation effect (roleOptions moved inside useEffect)
+  const isDark = theme === "dark";
+
+  const glow = isDark
+    ? { color: "#e63946", secondary: "#7a0a1a", hotspot: 0.7, brightness: 1.3 }
+    : { color: "#c8102e", secondary: "#7a0a1a", hotspot: 0.5, brightness: 1.1 };
+
   useEffect(() => {
-    const roleOptions = ["Web Developer", "Video Editor"];
-    
-    const currentIndex = loopNum % roleOptions.length;
-    const fullText = roleOptions[currentIndex];
+    const roles = ["Web Developer", "Video Editor"];
+    const fullText = roles[loopNum % roles.length];
 
     const tick = () => {
       if (isDeleting) {
         setDisplayRole(fullText.substring(0, displayRole.length - 1));
-        setTypingSpeed(100);
+        setTypingSpeed(70);
       } else {
         setDisplayRole(fullText.substring(0, displayRole.length + 1));
-        setTypingSpeed(150);
+        setTypingSpeed(100);
       }
 
       if (!isDeleting && displayRole === fullText) {
-        setTimeout(() => {
-          setIsDeleting(true);
-          setTypingSpeed(100);
-        }, 3000);
-      } else if (isDeleting && displayRole === '') {
+        setTimeout(() => setIsDeleting(true), 2200);
+      } else if (isDeleting && displayRole === "") {
         setIsDeleting(false);
-        setLoopNum(loopNum + 1);
-        setTypingSpeed(150);
+        setLoopNum((n) => n + 1);
       }
     };
 
     const timer = setTimeout(tick, typingSpeed);
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayRole, isDeleting, loopNum, typingSpeed]);
 
   useEffect(() => {
-    fetch('/data/profile.json')
-      .then(response => response.json())
-      .then(data => setProfile(data.hero))
-      .catch(error => console.error('Error loading profile:', error));
+    fetch("/data/profile.json")
+      .then((r) => r.json())
+      .then((data) => setProfile(data.hero))
+      .catch((err) => console.error("Error loading profile:", err));
   }, []);
 
   const handleCTAClick = (e, target) => {
     e.preventDefault();
-    const element = document.querySelector(target);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
+    const el = document.querySelector(target);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - 72;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   if (!profile) return null;
 
   return (
     <section id={id} className="hero reveal">
-      <div className="hero-background">
-        <div className="hero-shape shape-1"></div>
-        <div className="hero-shape shape-2"></div>
-        <div className="hero-shape shape-3"></div>
-        <div className="hero-shape shape-4"></div>
-      </div>
+      <GlowCursor
+        color={glow.color}
+        secondaryColor={glow.secondary}
+        trailLength={44}
+        trailWidth={7}
+        trailTaper={0.85}
+        followSpeed={0.18}
+        glowIntensity={1.6}
+        glowSpread={1.2}
+        hotspot={glow.hotspot}
+        brightness={glow.brightness}
+        opacity={0.9}
+        pulseSpeed={1}
+        noiseStrength={0.03}
+        idleFade
+        idleTimeout={900}
+        fadeDuration={700}
+        blendMode={isDark ? "screen" : "normal"}
+        maxDevicePixelRatio={1.5}
+      >
+        <div className="container hero-inner">
+          <div className="hero-content">
+            <span className="hero-eyebrow">Available for work</span>
 
-      <div className="container">
-        <div className="hero-content">
-          
-          <h1 className="hero-title">
-            <span className="hero-title-line">Creating digital</span>
-            <span className="hero-title-gradient">experiences</span>
-            <span className="hero-title-line">that matter</span>
-          </h1>
-          
-          {/* Typing Animation - Same style as About.jsx */}
-          <div className="hero-typing-section">
-            <span className="hero-typing-prefix">I'm a</span>
-            <div className="hero-typing-wrapper">
-              <span className="hero-typing-role">{displayRole}</span>
-              <span className="hero-typing-cursor"></span>
+            <h1 className="hero-title">
+              Hi, I&rsquo;m Yaman. I build for the web and edit video.
+            </h1>
+
+            <p className="hero-description">
+              Currently working as a{" "}
+              <span className="hero-typing-role">
+                {displayRole}
+                <span className="hero-typing-cursor" aria-hidden="true" />
+              </span>
+              . Based in Nepal, working with clients worldwide.
+            </p>
+
+            <div className="hero-stats">
+              {STATS.map((stat) => (
+                <div key={stat.label} className="hero-stat">
+                  <span className="hero-stat-number">
+                    <AnimatedNumber
+                      value={stat.value}
+                      duration={1400}
+                      enabled={play}
+                      startOnView={false}
+                    />
+                    <span aria-hidden="true">{stat.suffix}</span>
+                  </span>
+                  <span className="hero-stat-label">{stat.label}</span>
+                </div>
+              ))}
             </div>
-          </div>
-          
-          <p className="hero-description">{profile.tagline}</p>
-          
-          <div className="hero-stats">
-            <div className="hero-stat">
-              <span className="hero-stat-number">2+</span>
-              <span className="hero-stat-label">Years Coding</span>
+
+            <div className="hero-actions">
+              <a
+                href={profile.cta.projects}
+                className="hero-btn hero-btn-primary"
+                onClick={(e) => handleCTAClick(e, profile.cta.projects)}
+              >
+                View projects
+              </a>
+              <a
+                href={profile.cta.contact}
+                className="hero-btn hero-btn-secondary"
+                onClick={(e) => handleCTAClick(e, profile.cta.contact)}
+              >
+                Get in touch
+              </a>
+              <a
+                href="https://wa.me/9779713512703?text=Hi%20Yaman%2C%20I%27d%20like%20to%20talk%20about%20a%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-btn hero-btn-secondary"
+              >
+                <i className="fab fa-whatsapp" aria-hidden="true" />
+                WhatsApp
+              </a>
             </div>
-            <div className="hero-stat">
-              <span className="hero-stat-number">4+</span>
-              <span className="hero-stat-label">Years Editing</span>
-            </div>
-            <div className="hero-stat">
-              <span className="hero-stat-number">10+</span>
-              <span className="hero-stat-label">Projects</span>
-            </div>
-          </div>
-          
-          <div className="hero-actions">
-            <a 
-              href={profile.cta.projects}
-              className="hero-btn hero-btn-primary"
-              onClick={(e) => handleCTAClick(e, profile.cta.projects)}
-            >
-              <i className="fas fa-arrow-right"></i>
-              View My Work
-            </a>
-            <a 
-              href={profile.cta.contact}
-              className="hero-btn hero-btn-secondary"
-              onClick={(e) => handleCTAClick(e, profile.cta.contact)}
-            >
-              <i className="fas fa-paper-plane"></i>
-              Let's Talk
-            </a>
-            <a 
-              href="https://wa.me/9779713512703?text=Hi!%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20collaborate!"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hero-btn hero-btn-whatsapp"
-            >
-              <i className="fab fa-whatsapp"></i>
-              WhatsApp Me
-            </a>
           </div>
         </div>
-      </div>
+      </GlowCursor>
     </section>
   );
 };

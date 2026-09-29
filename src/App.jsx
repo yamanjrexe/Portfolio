@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar/Navbar";
@@ -36,16 +35,16 @@ function App() {
 
   useEffect(() => {
     fetch("/data/config.json")
-      .then((response) => {
-        if (!response.ok) throw new Error("Failed to load config");
-        return response.json();
+      .then((r) => {
+        if (!r.ok) throw new Error("Failed to load config");
+        return r.json();
       })
       .then((data) => {
         setConfig(data);
         setLoading(false);
       })
-      .catch((error) => {
-        console.error("Error loading config:", error);
+      .catch((err) => {
+        console.error("Error loading config:", err);
         setLoading(false);
       });
   }, []);
@@ -71,7 +70,7 @@ function App() {
         },
         { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
       );
-      reveals.forEach((reveal) => observer.observe(reveal));
+      reveals.forEach((el) => observer.observe(el));
     }, 100);
   };
 
@@ -85,6 +84,7 @@ function App() {
           height: "100vh",
           background: "var(--bg)",
           color: "var(--danger)",
+          fontFamily: "inherit",
         }}
       >
         Failed to load configuration
@@ -108,7 +108,7 @@ function App() {
         className="app"
         style={{
           opacity: showContent ? 1 : 0,
-          transition: "opacity 0.4s ease",
+          transition: "opacity 400ms cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
         {config && (
@@ -119,7 +119,7 @@ function App() {
               navigation={filteredNavigation}
             />
             <main>
-              <Hero id="home" />
+              <Hero id="home" play={showContent} />
               <About id="about" />
               <Skills id="skills" />
               <Projects id="projects" />
