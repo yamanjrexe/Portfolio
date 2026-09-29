@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import TextScramble from "../core/TextScramble";
 import "./Loading.css";
 
+const STATUSES = ["BOOTING", "LOADING ASSETS", "PREPARING VIEW", "READY"];
+
 const Loading = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
   const [statusIndex, setStatusIndex] = useState(0);
-
-  const statuses = ["BOOTING", "LOADING ASSETS", "PREPARING VIEW", "READY"];
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -28,8 +28,8 @@ const Loading = ({ onLoadingComplete }) => {
 
   useEffect(() => {
     const next = Math.min(
-      statuses.length - 1,
-      Math.floor((progress / 100) * statuses.length),
+      STATUSES.length - 1,
+      Math.floor((progress / 100) * STATUSES.length),
     );
     setStatusIndex(next);
   }, [progress]);
@@ -60,7 +60,7 @@ const Loading = ({ onLoadingComplete }) => {
         </div>
 
         <div className="loading-meta" aria-hidden="true">
-          <span className="loading-status">{statuses[statusIndex]}</span>
+          <span className="loading-status">{STATUSES[statusIndex]}</span>
           <span className="loading-percent">{progress}%</span>
         </div>
       </div>
