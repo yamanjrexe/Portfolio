@@ -1,117 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="/assets/images/icon.png" type="image/png">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#8b5cf6" />
-  <meta name="google-site-verification" content="sSjObBIotIFfXDqFveDribu74_mmUG_QrOFGwUmrQ7Q" />
-  <meta name="description" content="Yaman Chapagain - Web Developer & Video Editor Portfolio. Developer from Nepal specializing in web development and video editing." />
-  <meta name="keywords" content="Yaman Chapagain, web developer, video editor, Nepal, portfolio, React developer, frontend developer" />
-  <meta name="author" content="Yaman Chapagain" />
-  <meta name="robots" content="index, follow" />
-  <meta name="googlebot" content="index, follow" />
-  <meta name="language" content="English" />
-  <meta name="revisit-after" content="7 days" />
-  <meta name="distribution" content="global" />
-  
-  <!-- Geo Tags -->
-  <meta name="geo.region" content="NP" />
-  <meta name="geo.placename" content="Nepal" />
-  
-  <!-- Copyright & Rating -->
-  <meta name="copyright" content="Yaman Chapagain" />
-  <meta name="rating" content="General" />
-  
-  <!-- Mobile Optimization -->
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="MobileOptimized" content="320" />
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yamanchapagain.com.np/" />
-  <meta property="og:title" content="Yaman Chapagain - Web Developer & Video Editor" />
-  <meta property="og:description" content="Web developer and video editor from Nepal. Creating digital experiences that matter." />
-  <meta property="og:image" content="https://yamanchapagain.com.np/og-image.png" />
-  
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://yamanchapagain.com.np/" />
-  <meta property="twitter:title" content="Yaman Chapagain - Web Developer & Video Editor" />
-  <meta property="twitter:description" content="Web developer and video editor from Nepal. Creating digital experiences that matter." />
-  <meta property="twitter:image" content="https://yamanchapagain.com.np/og-image.png" />
-  
-  <link rel="apple-touch-icon" href="/logo192.png" />
-  <link rel="canonical" href="https://yamanchapagain.com.np/" />
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Yaman Jr - Full-Stack Web Developer & UI/UX-focused Product Builder." />
+    <meta name="keywords" content="Yaman Jr, Full-Stack Developer, React.js, Next.js, UI/UX" />
+    <meta name="robots" content="INDEX,FOLLOW" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yaman Chapagain - Portfolio</title>
+    <link rel="icon" href="%PUBLIC_URL%/assets/images/logo/favicon.png" type="image/png" />
 
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-PQ3G3CD5');</script>
-  <!-- End Google Tag Manager -->
-  
-  <title>Yaman Chapagain</title>
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
 
-  <!-- Schema.org Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": "https://yamanchapagain.com.np/#person",
-  "name": "Yaman Chapagain",
-  "url": "https://yamanchapagain.com.np/",
-  "image": "https://yamanchapagain.com.np/assets/images/profile/me.png",
-  "jobTitle": "Web Developer & Video Editor",
-  "description": "Yaman Chapagain is a web developer and video editor from Nepal.",
-  "address": {
-    "@type": "Country",
-    "name": "Nepal"
-  },
-  "sameAs": [
-    "https://github.com/yamanjrexe",
-    "https://www.facebook.com/yamanjrexe",
-    "https://instagram.com/yamanjr.exe"
-  ],
-  "knowsAbout": [
-    "Web Development",
-    "Video Editing",
-    "React",
-    "Node.js",
-    "MongoDB",
-    "CapCut"
-  ]
-}
-</script>
-  
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": "https://yamanchapagain.com.np/#website",
-  "name": "Yaman Chapagain Portfolio",
-  "url": "https://yamanchapagain.com.np/",
-  "description": "Portfolio of Yaman Chapagain, a web developer and video editor from Nepal.",
-  "publisher": {
-    "@id": "https://yamanchapagain.com.np/#person"
-  }
-}
-</script>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQ3G3CD5" height="0" width="0"
-    style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- Vendor CSS (order matters) -->
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/swiper-bundle.css" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/magnific-popup.css" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/aos.css" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/main.css" />
 
-
+    <!-- GSAP (must load BEFORE the React bundle) -->
+    <script src="%PUBLIC_URL%/assets/js/gsap/gsap.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/gsap/gsap-scroll-to-plugin.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/gsap/gsap-scroll-trigger.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/gsap/gsap-scroll-smoother.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/gsap/gsap-split-text.js"></script>
+    <script src="%PUBLIC_URL%/assets/js/gsap/chroma.min.js"></script>
 </head>
-<body>
-  <div id="root"></div>
+
+<body class="tw-magic-cursor">
+    <div id="root"></div>
 </body>
+
 </html>
