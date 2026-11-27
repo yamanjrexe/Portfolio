@@ -33,7 +33,7 @@ export default function About() {
                                 <img
                                     className="tw-anim-img w-100 tw-rounded-lg"
                                     data-animate="true"
-                                    src="assets/images/me/yaman.png"
+                                    src="assets/images/me/yaman.jpg"
                                     alt="Yaman Chapagain About"
                                     style={{
                                         objectFit: "cover",

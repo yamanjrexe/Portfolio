@@ -1,108 +1,95 @@
 import React from "react";
 
 const PROJECTS = [
-    {
-        id: 1,
-        title: "Jr Editz - Anime Editing Tutorials",
-        description:
-            "Jreditz is dedicated to teaching anime video editing, manga panel animation, and creative VFX for beginners and pros. With step-by-step tutorials and free resources, we help editors bring their ideas to life.",
-        image: "assets/images/projects/jr-editz.png",
-        techStack: ["HTML", "CSS", "Javascript"],
-        liveUrl: "https://jreditz.netlify.app/",
-        githubUrl: "https://github.com/yamanjrexe/JrEditz",
-        status: "live",
-    },
-    {
-        id: 2,
-        title: "AniPulse - Anime Tracker",
-        description:
-            "AniPulse is a modern, feature-rich anime tracker that helps you manage your watchlist, track progress, analyze detailed statistics, and celebrate your anime journey.",
-        image: "assets/images/projects/ani-pulse.png",
-        techStack: ["React", "CSS", "Node.js", "Firebase", "AnilistAPI"],
-        liveUrl: "https://ani-pulse.netlify.app/",
-        githubUrl: "https://github.com/yamanjrexe/AniPulse",
-        status: "live",
-    },
-    {
-        id: 3,
-        title: "Regina Shoe Center - E-commerce Website",
-        description:
-            "Regina Shoe Center is a modern e-commerce platform for selling shoes online. With a user-friendly interface and seamless shopping experience, customers can easily browse, select, and purchase their favorite footwear.",
-        image: "assets/images/projects/regina-shoe.png",
-        techStack: [
-            "HTML",
-            "CSS",
-            "Javascript",
-            "React",
-            "Node.js",
-            "Firebase",
-        ],
-        liveUrl: "#",
-        githubUrl: "https://github.com/yamanjrexe/Reginashoecenter",
-        status: "development",
-    },
-    {
-        id: 4,
-        title: "AniSora – Anime Streaming Platform",
-        description:
-            "AniSora is a full-featured anime streaming platform. It provides a seamless experience with a modern UI, high-quality streaming, and deep integration with AniList for watchlist synchronization.",
-        image: "assets/images/projects/ani-sora.png",
-        techStack: [
-            "React",
-            "Supabase",
-            "PostgreSQL",
-            "AniList API",
-            "OAuth 2.0",
-            "CSS",
-        ],
-        liveUrl: "#",
-        githubUrl: "https://github.com/yamanjrexe/AniSora",
-        status: "development",
-    },
-    {
-        id: 5,
-        title: "Edu Sphere",
-        description:
-            "Edu Sphere is a responsive educational web platform designed to deliver interactive learning resources through a clean and user-friendly interface.",
-        image: "assets/images/projects/edu-sphere.png",
-        techStack: ["HTML", "JS", "CSS"],
-        liveUrl: "https://edu-sphere1.netlify.app/",
-        githubUrl: "https://github.com/yamanjrexe/edusphere",
-        status: "live",
-    },
-    {
-        id: 6,
-        title: "Portfolio Site",
-        description:
-            "The site you're on. A custom React portfolio featuring a sleek dark aesthetic, smooth GSAP scroll animations, and a fully responsive layout. Built with modern web standards to showcase my projects, skills, and creative work.",
-        image: "assets/images/projects/portfolio.png",
-        techStack: ["React", "CSS", "GSAP", "AOS"],
-        liveUrl: "https://yamanchapagain.com.np",
-        githubUrl: "https://github.com/yamanjrexe/portfolio",
-        status: "live",
-    },
-    {
-        id: 7,
-        title: "Tic Tac Toe",
-        description:
-            "Browser game with a Minimax-powered AI opponent, three difficulty levels, and match score tracking. Scores and the last 20 matches persist between visits using localStorage.",
-        image: "assets/images/projects/tic-tac-toe.png",
-        techStack: ["HTML", "CSS", "JavaScript"],
-        liveUrl: "https://yamanjrexe.github.io/Tic-Tac-Toe",
-        githubUrl: "https://github.com/yamanjrexe/Tic-Tac-Toe",
-        status: "live",
-    },
-    {
-        id: 8,
-        title: "The Cube",
-        description:
-            "A browser-based Rubik's cube you can twist with a mouse or touch. Supports 2x2 through 5x5, three flip animations, camera FOV control, a scramble generator, and five color themes with an HSL editor.",
-        image: "assets/images/projects/the-cube.png",
-        techStack: ["JavaScript", "Three.js", "CSS"],
-        liveUrl: "https://yamanjrexe.github.io/The-Cube",
-        githubUrl: "https://github.com/yamanjrexe/The-Cube",
-        status: "live",
-    },
+  {
+    id: 1,
+    title: "Jr Editz - Anime Editing Tutorials",
+    description:
+      "Jreditz is dedicated to teaching anime video editing, manga panel animation, and creative VFX for beginners and pros. With step-by-step tutorials and free resources, we help editors bring their ideas to life.",
+    image: "assets/images/projects/jr-editz.png",
+    techStack: ["HTML", "CSS", "Javascript"],
+    liveUrl: "https://jreditz.netlify.app/",
+    githubUrl: "https://github.com/yamanjrexe/JrEditz",
+    status: "live",
+  },
+  {
+    id: 2,
+    title: "AniPulse - Anime Tracker",
+    description:
+      "AniPulse is a modern, feature-rich anime tracker that helps you manage your watchlist, track progress, analyze detailed statistics, and celebrate your anime journey.",
+    image: "assets/images/projects/ani-pulse.png",
+    techStack: ["React", "CSS", "Node.js", "Firebase", "AnilistAPI", "TmdAPI"],
+    liveUrl: "https://ani-pulse.netlify.app/",
+    githubUrl: "https://github.com/yamanjrexe/AniPulse",
+    status: "live",
+  },
+  {
+    id: 3,
+    title: "Regina Shoe Center - E-commerce Website",
+    description:
+      "Regina Shoe Center is a modern e-commerce platform for selling shoes online. With a user-friendly interface and seamless shopping experience, customers can easily browse, select, and purchase their favorite footwear.",
+    image: "assets/images/projects/regina-shoe.png",
+    techStack: ["HTML", "CSS", "Javascript", "React", "Node.js", "Firebase"],
+    liveUrl: "#",
+    githubUrl: "https://github.com/yamanjrexe/Reginashoecenter",
+    status: "development",
+  },
+  {
+    id: 4,
+    title: "Edu Sphere",
+    description:
+      "Edu Sphere is a responsive educational web platform designed to deliver interactive learning resources through a clean and user-friendly interface.",
+    image: "assets/images/projects/edu-sphere.png",
+    techStack: ["HTML", "JS", "CSS"],
+    liveUrl: "https://edu-sphere1.netlify.app/",
+    githubUrl: "https://github.com/yamanjrexe/edusphere",
+    status: "live",
+  },
+  {
+    id: 5,
+    title: "Portfolio Site",
+    description:
+      "The site you're on. A custom React portfolio featuring a sleek dark aesthetic, smooth GSAP scroll animations, and a fully responsive layout. Built with modern web standards to showcase my projects, skills, and creative work.",
+    image: "assets/images/projects/portfolio.png",
+    techStack: ["React", "CSS", "GSAP", "AOS"],
+    liveUrl: "https://yamanchapagain.com.np",
+    githubUrl: "https://github.com/yamanjrexe/portfolio",
+    status: "live",
+  },
+  {
+    id: 6,
+    title: "Tic Tac Toe",
+    description:
+      "Browser game with a Minimax-powered AI opponent, three difficulty levels, and match score tracking. Scores and the last 20 matches persist between visits using localStorage.",
+    image: "assets/images/projects/tic-tac-toe.png",
+    techStack: ["HTML", "CSS", "JavaScript"],
+    liveUrl: "https://yamanjrexe.github.io/Tic-Tac-Toe",
+    githubUrl: "https://github.com/yamanjrexe/Tic-Tac-Toe",
+    status: "live",
+  },
+  {
+    id: 7,
+    title: "The Cube",
+    description:
+      "A browser-based Rubik's cube you can twist with a mouse or touch. Supports 2x2 through 5x5, three flip animations, camera FOV control, a scramble generator, and five color themes with an HSL editor.",
+    image: "assets/images/projects/the-cube.png",
+    techStack: ["JavaScript", "Three.js", "CSS"],
+    liveUrl: "https://yamanjrexe.github.io/The-Cube",
+    githubUrl: "https://github.com/yamanjrexe/The-Cube",
+    status: "live",
+  },
+
+  {
+    id: 8,
+    title: "Ironvale - Survive The Raiders",
+    description:
+      "Ironvale - Survive The Raiders is a 3D voxel-style survival and tower-defense game built with Three.js. Fight endless waves of dangerous raiders, defend yourself using swords, axes, and shields, mine resources, construct defensive structures, and upgrade your weapons and armor at the Forge. Featuring progressively challenging enemy AI, multiple enemy types, wave-based survival, RPG-style progression, and a persistent save system.",
+    image: "assets/images/projects/ironvale.png",
+    techStack: ["HTML", "CSS", "JavaScript", "Three.js"],
+    liveUrl: "#",
+    githubUrl: "https://github.com/yamanjrexe/Ironvale",
+    status: "development",
+  },
 ];
 
 export default function Projects() {
